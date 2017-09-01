@@ -174,8 +174,9 @@ You'll need to set the following ENV variables in a .env file
 2. `atom .env` to edit the VARS
 3. Get a server credential from google for
    https://console.developers.google.com/apis/api/drive.googleapis.com/overview
-4. Get the private key and email from the json file google gets you
-5. Those are the ENV to use
+4. Make sure to Enable both Google Drive API and Google Sheets API
+5. Get the private key and email from the json file google gets you
+6. Those are the ENV to use
 
 Design Choices
 -------------
