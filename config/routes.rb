@@ -9,5 +9,13 @@ Rails.application.routes.draw do
       get "/needs" => 'needs#index'
       get "/shelters" => 'shelters#index'
     end
+
+    namespace :v2 do
+
+      post "/google-sheet-update" => "hooks#sheet_update"
+
+      get "/needs" => 'needs#index'
+      get "/shelters" => 'shelters#index'
+    end
   end
 end

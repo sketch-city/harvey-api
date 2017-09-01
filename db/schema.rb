@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831220720) do
+ActiveRecord::Schema.define(version: 20170901190643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,29 @@ ActiveRecord::Schema.define(version: 20170831220720) do
     t.boolean "are_supplies_needed"
     t.string "tell_us_about_the_supply_needs"
     t.string "anything_else_you_would_like_to_tell_us"
+    t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rides", force: :cascade do |t|
+    t.string "name"
+    t.string "address_name"
+    t.string "address"
+    t.string "city"
+    t.string "county"
+    t.string "phone"
+    t.boolean "requested"
+    t.boolean "offered"
+    t.float "longitude"
+    t.float "latitude"
+    t.integer "capacity_limit"
+    t.string "transport_needs"
+    t.string "pets"
+    t.string "cargo"
+    t.string "last_updated"
+    t.string "updated_by"
+    t.string "notes"
     t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170831220720) do
     t.string "address_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "needs", default: [], array: true
   end
 
 end
