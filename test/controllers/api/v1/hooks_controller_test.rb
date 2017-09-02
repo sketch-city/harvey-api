@@ -5,11 +5,11 @@ class Api::HooksControllerTest < ActionDispatch::IntegrationTest
 
   test "ping triggers refresh" do
 
-    assert_enqueued_with(job: ImportNeedsJob) do
+    assert_no_enqueued_jobs do
       post "/api/v1/google-sheet-update"
     end
 
-    assert_enqueued_with(job: ImportSheltersJob) do
+    assert_no_enqueued_jobs do
       post "/api/v1/google-sheet-update"
     end
   end
