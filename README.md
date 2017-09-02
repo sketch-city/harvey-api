@@ -1,12 +1,8 @@
 The Harvey Needs API
 ====================
 
-* Imports data from a public google data spreadsheet
-  * Right now that's https://docs.google.com/spreadsheets/d/14GHRHQ_7cqVrj0B7HCTVE5EbfpNFMbSI9Gi8azQyn-k/edit#gid=0
-* Each import does a full import of the needs and shelter sheets
+* Data is managed here without a sign in. Updates are queued and applied by admins.
 * We serve JSON data here, open and fresh
-* viasocket notifies our api when changes have been made to the source data in Google sheets. The api then does a full refresh of the data from the Google sheet.will post to us when an update is posted to the google spreadsheet
-* An ad-hoc import can be triggered with `rails google:import`
 
 API
 ----
@@ -190,20 +186,11 @@ Getting Started (Dev)
 #### Setting up your .env file
 You'll need to set the following ENV variables in a .env file
 
-1. Make a working copy of .env by runng this command at the terminal: `cp .env.sample .env`
+1. Make a working copy of .env by running this command at the terminal: `cp .env.sample .env`
 2. Edit the VARS
   * Atom users: `atom .env`
   * vim users: `vim .env`
   * emacs users: `emacs .env`
-3. Get a server credential from google for
-   https://console.developers.google.com/apis/api/drive.googleapis.com/overview
-   * Screenshot:  ![Screenshot](/public/images/readme/screenshot_create-service-account-key.png)
-
-4. Get the private key and email from the json file google gets you
-5. While still in the Google develop consoler enable the Google Sheets API. Once enabled it should look like this:
-![Screenshot](/public/images/readme/screenshot_enable_google_sheets_api.png)
-6. Back in the .env file now, replace the email value and private key values with the values in the JSON
-  * Take care to copy the full private key which will span multiple lines.
 
 #### Creating a local database
 * Prerequisites
@@ -219,16 +206,6 @@ You'll need to set the following ENV variables in a .env file
     * Example `createdb -O harvey-api_development harvey-api_development`
 * Run rails migrate to create schema
   * `rails db:migrate`
-* Test it's working by doing an initial import from the Google Sheet
-  * `rails google:import`
-  Sample output if successful
-  ```
-    Starting ImportSheltersJob 2017-09-01 23:32:10 -0400
-    ImportSheltersJob Complete - {282}
-    Starting ImportNeedsJob 2017-09-01 23:32:12 -0400
-    ImportNeedsJob Complete - {89}
-  ```
-
 * Test the API itself (Run API locally)
   * Example `rails server `
   Screenshot of Success:
@@ -273,8 +250,8 @@ Documentation such as READMEs (e.g., this document) are written in markdown per 
 Design Choices
 -------------
 
-* one benefit of building our own api is so that we can get rid of using google-sheets eventually.
-* Hosted on Heroku and Amazon RDS
+* Hosted on Heroku
+* Postgres / MiniTest / ActiveJob
 
 Thanks To:
 ---------
@@ -292,19 +269,6 @@ Appendix
 
 
 ### Errors you may get and what they mean
-* Could not load default credentials
-Looks like:
-```rails aborted!
-Could not load the default credentials
-```
-You either have not set up a key OR did not configure it correctly in your .env file
-
-* "accessNotConfigured: Google Sheets API"
-Looks like:
-```rails aborted!
-Google::Apis::ClientError: accessNotConfigured: Google Sheets API has not been used in project harvey-api before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=harvey-api then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
-```
-You set up a key properly in the Google console but you did not enable Google sheets.
 
 * "PG::ConnectionBad"
 Looks like:
