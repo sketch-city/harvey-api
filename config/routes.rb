@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
+  devise_for :users
 
-  root to: redirect("https://github.com/sketch-city/harvey-api")
+  resources :users, only: [:index, :show, :update]
+  resources :shelters do
+    get :drafts, on: :collection
+  end
+  resources :needs do
+    get :drafts, on: :collection
+  end
+  resources :drafts, only: [:show, :destroy] do
+    post :accept, on: :member
+  end
+  resources :amazon_products, except: [:new, :create, :destroy]
+
+  root to: "shelters#index"
   namespace :api do
     namespace :v1 do
 
@@ -8,6 +21,7 @@ Rails.application.routes.draw do
 
       get "/needs" => 'needs#index'
       get "/shelters" => 'shelters#index'
+      get "/products" => 'amazon_products#index'
     end
   end
 end
