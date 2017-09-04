@@ -1,0 +1,229 @@
+FORMAT: 1A
+HOST: http://api.harveyneeds.org
+
+# Harvey Needs
+
+## Group Shelters
+
+Resources related to shelters in the API.
+
+## All Shelters [/shelters]
+A resource representing all of shelters in the system.
+
+We have added the query URI template parameter - `limit`. This parameter is
+used for limiting the number of results returned by some actions on this
+resource. It does not affect every possible action of this resource, therefore
+we will discuss it only at the particular action level below.
+
+### Retrieve all Shelters [GET]
+
++ Parameters
+
+    + limit (number, optional) - The maximum number of results to return.
+    + county (string, optional) - County Name.
+    + accepting (boolean, optional) - true/false.
+    + shelter (string, optional) - Shelter Name.
+    + lat (number, optional) - We'll order by the lat/lon and return results within a 100 mile radius
+    + lon (number, optional) - We'll order by the lat/lon and return results within a 100 mile radius
+
++ Response 200 (application/json)
+
+        {
+            "shelters": [
+                {
+                    "county": "Fort Bend",
+                    "shelter": "Gallery Furniture Grand Parkway",
+                    "address": "7227 W. Grand Parkway South",
+                    "city": "Richmond",
+                    "pets": "Yes, crated and kept by owner's side",
+                    "phone": "(281) 407-7161",
+                    "accepting": true,
+                    "last_updated": "2017-08-30 12:50 PM",
+                    "updated_by": "bon",
+                    "notes": "No answer (info here by Jane at 8/29/2017 21:17:00)",
+                    "volunteer_needs": "Open up for volunteers in the morning, 8/30th",
+                    "longitude": "-95.7505562",
+                    "latitude": "29.673294",
+                    "supply_needs": "toiletries, water, juice, gatorade",
+                    "source": "",
+                    "needs": ["Open up for volunteers in the morning", "8/30th", "toiletries", "water","juice","gatorade"],
+                    "updatedAt":"2017-09-01T11:26:00-05:00",
+                    "cleanPhone":"2814077161"
+                },
+                {
+                    "county": "Harris",
+                    "shelter": "Gallery Furniture",
+                    "address": "6006 N. Freeway",
+                    "city": "Houston",
+                    "pets": "Yes",
+                    "phone": "(713) 694-5570",
+                    "accepting": false,
+                    "last_updated": "2017-08-30 12:57 PM",
+                    "updated_by": "bon",
+                    "notes": "No answer (info here by Claudia at 8/29 10:48am; At max capacity.)",
+                    "volunteer_needs": "",
+                    "longitude": "-95.396748",
+                    "latitude": "29.854114",
+                    "supply_needs": "trucks to move people to GRB or other shelters. ",
+                    "source": "",
+                    "needs": ["trucks to move people to GRB or other shelters. "],
+                    "updatedAt":"2017-08-30T12:57:00-05:00",
+                    "cleanPhone":"7136945570"
+                },
+                {
+                    "county": "Harris",
+                    "shelter": "Gallery Furniture",
+                    "address": "6006 N. Freeway",
+                    "city": "Houston",
+                    "pets": "Yes",
+                    "phone": "ring ring ring banannaphone",
+                    "accepting": false,
+                    "last_updated": "twelve hours before dawn",
+                    "updated_by": "bon",
+                    "notes": "No answer (info here by Claudia at 8/29 10:48am; At max capacity.)",
+                    "volunteer_needs": "",
+                    "longitude": "-95.396748",
+                    "latitude": "29.854114",
+                    "supply_needs": "trucks to move people to GRB or other shelters. ",
+                    "source": "",
+                    "needs": ["trucks to move people to GRB or other shelters. "],
+                    "updatedAt":"baddate",
+                    "cleanPhone":"badphone"
+                }
+            ],
+            "meta": {
+                "result_count": 5,
+                "filters": {
+                    "shelter": "Gallery"
+                }
+            }
+        }
+
+## Group Needs
+
+Resources related to needs in the API.
+
+## All Needs [/needs]
+A resource representing all of needs in the system.
+
+
+### Retrieve all Needs [GET]
+
++ Parameters
+
+    + limit (number, optional) - The maximum number of results to return.
+    + volunteers_needed (boolean, optional) - true/false.
+    + supplies_needed (boolean, optional) - true/false.
+    + location_name (string, optional) - Location Name.
+    + lat (number, optional) - We'll order by the lat/lon and return results within a 100 mile radius
+    + lon (number, optional) - We'll order by the lat/lon and return results within a 100 mile radius
+
++ Response 200 (application/json)
+
+        {
+            "needs": [
+                {
+                    "updated_by": "Taylor",
+                    "timestamp": "2017-08-31 12:52",
+                    "location_name": "BBVA Compass Stadium",
+                    "location_address": "2200 Texas Ave, Houston, TX 77003",
+                    "longitude": "-95.351565",
+                    "latitude": "29.752355",
+                    "contact_for_this_location_name": "",
+                    "contact_for_this_location_phone_number": "",
+                    "are_volunteers_needed": true,
+                    "tell_us_about_the_volunteer_needs": "Need volunteers to process donations, sign up through Red Cross. Friday, September 1 from 8 a.m.-8 p.m. daily. More details: https://www.houstondynamo.com/post/2017/08/30/bbva-compass-stadium-capacity-no-longer-collecting-donations-storm-relief",
+                    "are_supplies_needed": false,
+                    "tell_us_about_the_supply_needs": "No longer taking donations",
+                    "anything_else_you_would_like_to_tell_us": ""
+                }
+            ],
+            "meta": {
+                "result_count": 1,
+                "filters": {
+                    "location_name": "BBVA"
+                }
+            }
+        }
+
+## Group Products
+
+Resources related to products in the API.
+
+## All Needs [/products]
+A resource representing all of products in the system.
+
+
+### Retrieve all Needs [GET]
+
++ Parameters
+
+    + limit (number, optional) - The maximum number of results to return.
+    + need (string, optional) - Name of need.
+    + priority (boolean, optional) - true/false.
+    + category (string, optional) - matching either the category_specific or category_general.
+
++ Response 200 (application/json)
+
+        {
+          "products": [
+            {
+              "need": "pet items",
+              "asin": "B00ME73XUG",
+              "amazon_title": "PET FACTORY 28750 Chicken Dog Roll, 40-Pack",
+              "detail_url":
+                "https://www.amazon.com/FACTORY-28750-Chicken-Roll-40-Pack/dp/B00ME73XUG?psc=1&SubscriptionId=AKIAJ5PESCDQX7KIMQ5Q&tag=oneclickrelie-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B00ME73XUG",
+              "priority": false,
+              "category_specific": "Rawhide",
+              "category_general": "Pet Supplies"
+            }
+          ],
+          "meta": {
+            "result_count": 247
+          }
+        }
+
+## Group Charitable Organizations
+
+Resources related to charitable organizations in the API.
+
+## All Needs [/charitable_organizations]
+A resource representing all of charitable organizations in the system.
+
+
+### Retrieve all Charitable Organizations [GET]
+
++ Parameters
+
+    + limit (number, optional) - The maximum number of results to return.
+    + name (string, optional) - Name of organization.
+    + food_bank (boolean, optional) - true/false.
+    + services (string, optional) - Services provided.
+    + city (string, optional) - the organizations in a city.
+
++ Response 200 (application/json)
+
+        {
+          "charitable_organizations": [
+            {
+              "name": "Boys and Girls Country",
+              "services": "Children",
+              "food_bank": false,
+              "donation_website": "https://www.boysandgirlscountry.org/donate",
+              "phone_number": "(281)351-4976",
+              "email": "info@boysandgirlscountry.org",
+              "physical_address": "18806 Roberts Road",
+              "city": "Hockley",
+              "state": "TX",
+              "zip": "77447",
+              "updatedAt": "2017-09-04T00:58:58.088Z"
+            }
+          ],
+
+          "meta": {
+            "result_count": 1,
+            "filters": {
+              "city": "Hockley"
+            }
+          }
+        }
