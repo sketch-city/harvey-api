@@ -13,7 +13,7 @@ module Api
         end
 
         def create
-          @marker = ::Connect::Marker.new(marker_params)
+          @marker = ::Connect::Marker.new(marker_params.merge(device_uuid: device_uuid))
           if @marker.save
             render :show, status: :created, location: @marker
           else
@@ -95,7 +95,6 @@ module Api
                         :phone,
                         :resolved)
                 .tap do |marker|
-                  marker[:device_uuid] = params.dig(:marker, :device_uuid) if action_name == 'create'
                   marker[:categories] = params.dig(:marker, :categories).permit! if params.dig(:marker, :categories)
                   marker[:data] = params.dig(:marker, :data).permit! if params.dig(:marker, :data)
                 end
