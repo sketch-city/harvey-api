@@ -11,8 +11,16 @@ class Shelter < ApplicationRecord
   default_scope { where(active: !false) }
 
   geocoded_by :address
+  after_validation :geocode, if: :should_geocode
 
   after_commit do
     ShelterUpdateNotifierJob.perform_later self
+  end
+
+  private
+
+  def should_geocode
+    (address.present? && city.present?) &&
+      (address_changed? || city_changed?)
   end
 end

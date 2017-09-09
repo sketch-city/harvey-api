@@ -14,14 +14,14 @@ class GeoDataRakeTask < ActiveSupport::TestCase
     address = "1010 Waugh"
     city = "Houston"
 
-    stubbed_lat = 29.7488469
-    stubbed_lng = -95.4593152
+    stubbed_lat = 29.7496888
+    stubbed_lng = -95.4579427
 
-    shelter = Shelter.create!({
+    shelter = Shelter.create!(
       shelter: "Houston Area Women's Center",
       address: address,
       city: city
-    })
+    )
 
     add_stub(shelter, stubbed_lat, stubbed_lng)
 
