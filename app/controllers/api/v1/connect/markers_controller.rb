@@ -13,7 +13,7 @@ module Api
         end
 
         def create
-          @marker = ::Connect::Marker.new(marker_params)
+          @marker = ::Connect::Marker.new(marker_params.merge(device_uuid: device_uuid))
           if @marker.save
             render :show, status: :created, location: @marker
           else
