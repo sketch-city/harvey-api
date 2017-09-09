@@ -13,7 +13,6 @@
 
 
   <fieldset>
-
     <div class="row">
       <div class="column">
         <label><%= f.check_box :accepting %> Accepting</label>
@@ -26,6 +25,9 @@
           :lng => '#geocode-lng',
           :placeid => '#geocode-place-id',
           :city => '#geocode-city',
+          :county => '#geocode-county',
+          :zip => '#geocode-zip',
+          :state => '#geocode-state',
           :mapselector => '#map'
         }, :required => true, :autofocus => true %>
 
@@ -33,7 +35,12 @@
         <%= f.text_field :shelter, :required => true, :id => 'geocode-name' %>
         <%= f.label :phone %>
         <%= f.text_field :phone, :required => true, :id => 'geocode-phone' %>
-  </div>
+
+        <%= f.label :county %>
+        <%= f.text_field :county, :id => 'geocode-county' %>
+        <%= f.label :zip %>
+        <%= f.text_field :zip, :id => 'geocode-zip' %>
+    </div>
     <div class="column">
       <label>Map</label>
       <div id="map" style="height: 300px; width: 100%"></div>
@@ -50,8 +57,9 @@
         })
       </script>
       <% end %>
+    </div>
   </div>
-  </div>
+
     <%= f.label :source %>
     <%= f.text_field :source %>
 
@@ -73,6 +81,9 @@
     <%= f.label :food_pantry %>
     <%= f.text_field :food_pantry %>
 
+    <%= f.label :special_needs %>
+    <%= f.check_box :special_needs %>
+
     <%= f.hidden_field :address, :id => 'geocode-address' %>
     <%= f.hidden_field :city, :id => 'geocode-city' %>
     <%= f.hidden_field :latitude, :id => 'geocode-lat' %>
@@ -81,6 +92,9 @@
     <% if user_signed_in? && current_user.admin? %>
       <%= f.label :private_notes %>
       <%= f.text_area :private_notes %>
+
+      <%= f.label :private_email %>
+      <%= f.text_field :private_email %>
     <% end %>
 
     <%= f.hidden_field :google_place_id, :id => 'geocode-place-id' %>
