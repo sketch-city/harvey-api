@@ -50,7 +50,7 @@ class Api::V1::Connect::MarkersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create marker" do
-    keys = %w(marker_type name description categories phone latitude longitude data device_uuid)
+    keys = %w(marker_type name description categories phone latitude longitude data)
     attribs = connect_markers(:have).attributes.slice(*keys)
     assert_difference('Connect::Marker.count') do
       post api_v1_connect_markers_path, params: { marker: attribs }, headers: default_headers
@@ -61,7 +61,7 @@ class Api::V1::Connect::MarkersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create a marker without a device uuid" do
-    keys = %w(marker_type name description categories phone latitude longitude data device_uuid)
+    keys = %w(marker_type name description categories phone latitude longitude data)
     attribs = connect_markers(:have).attributes.slice(*keys)
     post api_v1_connect_markers_path, params: { marker: attribs }, headers: default_headers({})
     assert_response 403
