@@ -1,4 +1,4 @@
-json.extract! need, :updated_by, :location_name,
+json.extract! need, :id, :updated_by, :location_name,
   :location_address , :longitude , :latitude , :contact_for_this_location_name,
   :contact_for_this_location_phone_number , :are_volunteers_needed,
   :tell_us_about_the_volunteer_needs , :are_supplies_needed,

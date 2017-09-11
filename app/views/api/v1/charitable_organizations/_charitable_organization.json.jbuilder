@@ -1,4 +1,4 @@
-json.extract! charitable_organization, :name, :services, :food_bank,
+json.extract! charitable_organization, :id, :name, :services, :food_bank,
   :donation_website, :phone_number, :email, :physical_address, :city, :state, :zip
 
 
