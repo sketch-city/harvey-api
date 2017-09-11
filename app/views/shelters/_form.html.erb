@@ -26,6 +26,8 @@
           :lng => '#geocode-lng',
           :placeid => '#geocode-place-id',
           :city => '#geocode-city',
+          :county => '#geocode-county',
+          :state => '#geocode-state',
           :mapselector => '#map'
         }, :required => true, :autofocus => true %>
 
@@ -75,6 +77,8 @@
 
     <%= f.hidden_field :address, :id => 'geocode-address' %>
     <%= f.hidden_field :city, :id => 'geocode-city' %>
+    <%= f.hidden_field :county, :id => 'geocode-county' %>
+    <%= f.hidden_field :state, :id => 'geocode-state' %>
     <%= f.hidden_field :latitude, :id => 'geocode-lat' %>
     <%= f.hidden_field :longitude, :id => 'geocode-lng' %>
 
