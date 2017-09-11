@@ -1,9 +1,16 @@
 class Shelter < ApplicationRecord
-  ColumnNames = ["id", "accepting", "address", "address_name", "city", "county", "notes", "pets", "phone", "shelter", "source", "supply_needs", "updated_by", "volunteer_needs", "distribution_center", "food_pantry", "updated_at", "latitude", "longitude"]
+  ColumnNames = ["id", "accepting", "address", "address_name", "city", "county",
+                 "state", "notes", "pets", "phone", "shelter", "source",
+                 "supply_needs", "updated_by", "volunteer_needs",
+                 "distribution_center", "food_pantry", "updated_at",
+                 "latitude", "longitude"]
 
   HeaderNames = ColumnNames.map(&:titleize)
 
-  UpdateFields = ["accepting", "address", "address_name", "city", "county", "notes", "pets", "phone", "shelter", "source", "supply_needs", "updated_by", "volunteer_needs", "distribution_center", "food_pantry", "latitude", "longitude"]
+  UpdateFields = ["accepting", "address", "address_name", "city", "county",
+                  "state", "notes", "pets", "phone", "shelter", "source",
+                  "supply_needs", "updated_by", "volunteer_needs",
+                  "distribution_center", "food_pantry", "latitude", "longitude"]
 
   PrivateFields = ["private_notes"]
 

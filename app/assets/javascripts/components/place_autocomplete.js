@@ -36,6 +36,24 @@
         $(_this.opts.fillCity).val("")
       }
 
+      var countyComponent = place.address_components.find(function(c) {
+        return c.types.indexOf("administrative_area_level_2") >= 0
+      })
+      if (!!countyComponent) {
+        $(_this.opts.fillCounty).val(countyComponent.long_name)
+      } else {
+        $(_this.opts.fillCounty).val("")
+      }
+
+      var stateComponent = place.address_components.find(function(c) {
+        return c.types.indexOf("administrative_area_level_1") >= 0
+      })
+      if (!!stateComponent) {
+        $(_this.opts.fillState).val(stateComponent.short_name)
+      } else {
+        $(_this.opts.fillState).val("")
+      }
+
       if (!!place.formatted_phone_number) {
         $(_this.opts.fillPhone).val(place.formatted_phone_number)
       }
@@ -80,7 +98,9 @@
           fillLat: $el.data("lat"),
           fillLng: $el.data("lng"),
           fillPlaceId: $el.data("placeid"),
-          fillCity: $el.data("city")
+          fillCity: $el.data("city"),
+          fillCounty: $el.data("county"),
+          fillState: $el.data("state")
         },
         function(place) {
           var selector = $el.data("mapselector")
