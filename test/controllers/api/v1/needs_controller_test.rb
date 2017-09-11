@@ -2,6 +2,14 @@ require 'test_helper'
 
 class Api::NeedsControllerTest < ActionDispatch::IntegrationTest
 
+  test "Using If-Modified-Since will 304" do
+    max = Need.maximum("updated_at")
+    get "/api/v1/needs", headers: {
+      "If-Modified-Since" => max.rfc2822
+    }
+    assert_equal 304, response.status
+  end
+
   test "returns all needs" do
     count = Need.count
     get "/api/v1/needs"

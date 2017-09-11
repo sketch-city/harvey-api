@@ -32,6 +32,8 @@ class Api::V1::SheltersController < ApplicationController
     if params[:limit].to_i > 0
       @shelters = @shelters.limit(params[:limit].to_i)
     end
+
+    fresh_when(etag: @shelters, last_modified: Shelter.maximum(:updated_at))
   end
 
 end

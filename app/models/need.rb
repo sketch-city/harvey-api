@@ -24,4 +24,13 @@ class Need < ApplicationRecord
   after_commit do
     NeedUpdateNotifierJob.perform_later self
   end
+
+  before_save :calculate_values
+
+  def calculate_values
+    self.calculated_needs = (tell_us_about_the_volunteer_needs ||"").split(",") + (tell_us_about_the_supply_needs || "").split(",")
+    self.calculated_updated_at_rfc3339 = (updated_at || Time.now).in_time_zone("Central Time (US & Canada)").rfc3339
+    stripped_phone = (contact_for_this_location_phone_number||"").gsub(/\D/,"")
+    self.calculated_phone = stripped_phone.match?(/^\d{10}$/) ? stripped_phone : "badphone"
+  end
 end

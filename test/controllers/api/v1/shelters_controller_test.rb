@@ -2,6 +2,14 @@ require 'test_helper'
 
 class Api::SheltersControllerTest < ActionDispatch::IntegrationTest
 
+  test "Using If-Modified-Since will 304" do
+    max = Shelter.maximum("updated_at")
+    get "/api/v1/shelters", headers: {
+      "If-Modified-Since" => max.rfc2822
+    }
+    assert_equal 304, response.status
+  end
+
   test "returns all shelters" do
     count = Shelter.count
     get "/api/v1/shelters"

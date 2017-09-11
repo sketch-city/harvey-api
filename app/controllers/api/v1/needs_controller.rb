@@ -32,6 +32,10 @@ class Api::V1::NeedsController < ApplicationController
       if params[:limit].to_i > 0
         @needs = @needs.limit(params[:limit].to_i)
       end
+
+
+      fresh_when(etag: @needs, last_modified: Need.maximum(:updated_at))
+
   end
 
 end

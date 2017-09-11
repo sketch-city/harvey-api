@@ -33,5 +33,8 @@ class Api::V1::CharitableOrganizationsController < ApplicationController
       if params[:limit].to_i > 0
         @charitable_organizations = @charitable_organizations.limit(params[:limit].to_i)
       end
+
+      fresh_when(etag: @charitable_organizations, last_modified: CharitableOrganization.maximum(:updated_at))
+
   end
 end

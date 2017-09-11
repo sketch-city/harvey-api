@@ -2,6 +2,14 @@ require 'test_helper'
 
 class Api::AmazonProductsControllerTest < ActionDispatch::IntegrationTest
 
+  test "Using If-Modified-Since will 304" do
+    max = AmazonProduct.maximum("updated_at")
+    get "/api/v1/products", headers: {
+      "If-Modified-Since" => max.rfc2822
+    }
+    assert_equal 304, response.status
+  end
+
   test "returns all needs" do
     needs = Need.all.map(&:clean_needs).flatten.uniq
     count = AmazonProduct.active.where(need: needs).count
