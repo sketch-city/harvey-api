@@ -11,7 +11,7 @@ class Api::V1::SheltersController < ApplicationController
     if params[:lat].present? && params[:lon].present?
       @filters[:lon] = params[:lon]
       @filters[:lat] = params[:lat]
-      @shelters = @shelters.near([params[:lat], params[:lon]], 100)
+      @shelters = @shelters.near([params[:lat], params[:lon]], 100, order: "distance")
     end
 
     if params[:county].present?
@@ -29,11 +29,15 @@ class Api::V1::SheltersController < ApplicationController
       @shelters = @shelters.where(accepting: true)
     end
 
-    if params[:limit].to_i > 0
-      @shelters = @shelters.limit(params[:limit].to_i)
-    end
+    if stale?(etag: @shelters, last_modified: @shelters.maximum(:updated_at), public: true)
 
-    fresh_when(etag: @shelters, last_modified: Shelter.maximum(:updated_at))
+      # here because limit is causing a SQL problem:  column "distance" does not exist
+      if params[:limit].to_i > 0
+        @filters[:limit] = params[:limit].to_i
+        @shelters = @shelters.take(params[:limit].to_i)
+      end
+
+    end
   end
 
 end

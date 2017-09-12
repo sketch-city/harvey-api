@@ -18,6 +18,13 @@ class Api::NeedsControllerTest < ActionDispatch::IntegrationTest
     assert_equal count, json["meta"]["result_count"]
   end
 
+  test "Geo and limits work" do
+    get "/api/v1/needs?lat=30.0071377&lon=-95.3797033&limit=1"
+    json = JSON.parse(response.body)
+    assert_equal 1, json["needs"].length
+    assert_equal 1, json["meta"]["result_count"]
+  end
+
   test "filters are returned" do
     count = Need.where(are_supplies_needed: true).count
     get "/api/v1/needs?supplies_needed=true"

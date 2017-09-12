@@ -37,6 +37,7 @@ class Api::V1::AmazonProductsController < ApplicationController
       @products = @products.limit(params[:limit].to_i)
     end
 
-    fresh_when(etag: @products, last_modified: AmazonProduct.maximum(:updated_at))
+    fresh_when(etag: @products, last_modified: @products.maximum(:updated_at), public: true)
+
   end
 end

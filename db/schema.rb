@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20170911210028) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active"], name: "index_locations_on_active"
+    t.index ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
   end
 
   create_table "mucked_homes", force: :cascade do |t|
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(version: 20170911210028) do
     t.string "calculated_updated_at_rfc3339"
     t.string "calculated_phone"
     t.index ["active"], name: "index_needs_on_active"
+    t.index ["latitude", "longitude"], name: "index_needs_on_latitude_and_longitude"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -175,8 +177,7 @@ ActiveRecord::Schema.define(version: 20170911210028) do
     t.string "calculated_phone"
     t.index ["accepting"], name: "index_shelters_on_accepting"
     t.index ["active"], name: "index_shelters_on_active"
-    t.index ["latitude"], name: "index_shelters_on_latitude"
-    t.index ["longitude"], name: "index_shelters_on_longitude"
+    t.index ["latitude", "longitude"], name: "index_shelters_on_latitude_and_longitude"
   end
 
   create_table "users", force: :cascade do |t|

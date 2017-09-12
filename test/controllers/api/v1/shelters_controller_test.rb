@@ -18,6 +18,15 @@ class Api::SheltersControllerTest < ActionDispatch::IntegrationTest
     assert_equal count, json["meta"]["result_count"]
   end
 
+  test "Geo and limits work" do
+    count = Shelter.count
+    get "/api/v1/shelters?lat=30.0071377&lon=-95.3797033&limit=1"
+    json = JSON.parse(response.body)
+    assert_equal shelters(:lonestar).shelter, json["shelters"].first["shelter"]
+    assert_equal 1, json["shelters"].length
+    assert_equal 1, json["meta"]["result_count"]
+  end
+
   test "filters are returned" do
     count = Shelter.where(accepting: true).count
     get "/api/v1/shelters?accepting=true"
