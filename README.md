@@ -55,6 +55,7 @@ Shape:
 {
     "shelters": [
         {
+            "id": "283157",
             "county": "Fort Bend",
             "shelter": "Gallery Furniture Grand Parkway",
             "address": "7227 W. Grand Parkway South",
@@ -75,6 +76,7 @@ Shape:
             "cleanPhone":"2814077161"
         },
         {
+            "id": "283158",
             "county": "Harris",
             "shelter": "Gallery Furniture",
             "address": "6006 N. Freeway",
@@ -95,6 +97,7 @@ Shape:
             "cleanPhone":"7136945570"
         },
         {
+            "id": "283159",
             "county": "Harris",
             "shelter": "Gallery Furniture",
             "address": "6006 N. Freeway",
@@ -151,6 +154,7 @@ Shape:
 {
     "needs": [
         {
+            "id": "56892"
             "updated_by": "Taylor",
             "timestamp": "2017-08-31 12:52",
             "location_name": "BBVA Compass Stadium",
@@ -203,6 +207,7 @@ Shape:
 {
   "products": [
     {
+      "id": "98245",
       "need": "pet items",
       "asin": "B00ME73XUG",
       "amazon_title": "PET FACTORY 28750 Chicken Dog Roll, 40-Pack",
@@ -242,6 +247,7 @@ Shape:
 {
   "charitable_organizations": [
     {
+      "id": "12893"
       "name": "Boys and Girls Country",
       "services": "Children",
       "food_bank": false,
