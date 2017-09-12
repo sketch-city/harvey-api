@@ -1,4 +1,4 @@
-json.extract! shelter, :county, :shelter, :address, :city, :pets,
+json.extract! shelter, :id, :county, :shelter, :address, :city, :pets,
   :phone, :accepting, :updated_by, :notes,
   :volunteer_needs, :longitude, :latitude, :supply_needs, :source
 
