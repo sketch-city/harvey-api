@@ -4,6 +4,14 @@ class Api::CharitableOrganizationsControllerTest < ActionDispatch::IntegrationTe
 
   fixtures :all
 
+  test "Using If-Modified-Since will 304" do
+    max = CharitableOrganization.maximum("updated_at")
+    get "/api/v1/charitable_organizations", headers: {
+      "If-Modified-Since" => max.rfc2822
+    }
+    assert_equal 304, response.status
+  end
+
   test "returns all charitable_organizations" do
     count = CharitableOrganization.count
     get "/api/v1/charitable_organizations"

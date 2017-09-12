@@ -30,8 +30,15 @@ class Api::V1::CharitableOrganizationsController < ApplicationController
         @charitable_organizations = @charitable_organizations.where("city ILIKE ?", "%#{params[:city]}%")
       end
 
-      if params[:limit].to_i > 0
-        @charitable_organizations = @charitable_organizations.limit(params[:limit].to_i)
+      if stale?(etag: @charitable_organizations, last_modified: @charitable_organizations.maximum(:updated_at), public: true)
+
+        # here because limit is causing a SQL problem:  column "distance" does not exist
+        if params[:limit].to_i > 0
+          @filters[:limit] = params[:limit].to_i
+          @charitable_organizations = @charitable_organizations.take(params[:limit].to_i)
+        end
+
       end
+
   end
 end

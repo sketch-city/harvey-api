@@ -31,6 +31,21 @@ API
 * Sample API for list of all shelters: https://api.harveyneeds.org/api/v1/shelters
 * Sample API for list of all shelters accepting people: https://api.harveyneeds.org/api/v1/shelters?accepting=true
 
+### Speeding up results
+
+You can use the `If-Modified-Since` header to check if there are any new results since that timestamp. If there are no new results, you'll receive a `304 NOT MODIFIED`.
+
+```
+GET /api/v1/shelters HTTP/1.1
+Host: api.harveyneeds.org
+If-Modified-Since: Mon, 11 Sep 2017 21:23:03 -0000
+```
+
+The format for the date timestamp is rfc2822, though you can use any HTTP approved format.
+
+* With Moment.js: `moment.utc().format("ddd, MM MMM YYYY HH:mm:ss [GMT]");`
+* With Rails: `Time.now.utc.rfc2822`
+
 ### Shelters Endpoint
 
 Shape:

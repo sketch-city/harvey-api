@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911052811) do
+ActiveRecord::Schema.define(version: 20170911210028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170911052811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
+    t.index ["active"], name: "index_charitable_organizations_on_active"
   end
 
   create_table "connect_markers", force: :cascade do |t|
@@ -100,6 +101,8 @@ ActiveRecord::Schema.define(version: 20170911052811) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_locations_on_active"
+    t.index ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
   end
 
   create_table "mucked_homes", force: :cascade do |t|
@@ -131,6 +134,11 @@ ActiveRecord::Schema.define(version: 20170911052811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
+    t.string "calculated_needs", array: true
+    t.string "calculated_updated_at_rfc3339"
+    t.string "calculated_phone"
+    t.index ["active"], name: "index_needs_on_active"
+    t.index ["latitude", "longitude"], name: "index_needs_on_latitude_and_longitude"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -164,6 +172,12 @@ ActiveRecord::Schema.define(version: 20170911052811) do
     t.text "distribution_center"
     t.text "food_pantry"
     t.string "state"
+    t.string "calculated_needs", array: true
+    t.string "calculated_updated_at_rfc3339"
+    t.string "calculated_phone"
+    t.index ["accepting"], name: "index_shelters_on_accepting"
+    t.index ["active"], name: "index_shelters_on_active"
+    t.index ["latitude", "longitude"], name: "index_shelters_on_latitude_and_longitude"
   end
 
   create_table "users", force: :cascade do |t|
