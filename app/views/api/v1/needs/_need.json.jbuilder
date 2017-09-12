@@ -5,11 +5,9 @@ json.extract! need, :id, :updated_by, :location_name,
   :tell_us_about_the_supply_needs , :anything_else_you_would_like_to_tell_us
   :source
 
-json.needs (need.tell_us_about_the_volunteer_needs ||"").split(",") + (need.tell_us_about_the_supply_needs || "").split(",")
+json.needs need.calculated_needs
 
-json.updated_at need.updated_at.in_time_zone("Central Time (US & Canada)").rfc3339
-json.updatedAt need.updated_at.in_time_zone("Central Time (US & Canada)").rfc3339
-json.timestamp need.updated_at.in_time_zone("Central Time (US & Canada)").rfc3339
-
-stripped_phone = (need.contact_for_this_location_phone_number||"").gsub(/\D/,"")
-json.cleanPhone stripped_phone.match?(/^\d{10}$/)? stripped_phone : "badphone"
+json.updated_at need.calculated_updated_at_rfc3339
+json.updatedAt need.calculated_updated_at_rfc3339
+json.last_updated need.calculated_updated_at_rfc3339
+json.cleanPhone need.calculated_phone

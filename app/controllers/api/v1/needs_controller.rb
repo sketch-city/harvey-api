@@ -29,9 +29,17 @@ class Api::V1::NeedsController < ApplicationController
         @needs = @needs.where(are_supplies_needed: true)
       end
 
-      if params[:limit].to_i > 0
-        @needs = @needs.limit(params[:limit].to_i)
+
+      if stale?(etag: @needs, last_modified: @needs.maximum(:updated_at), public: true)
+
+        # here because limit is causing a SQL problem:  column "distance" does not exist
+        if params[:limit].to_i > 0
+          @filters[:limit] = params[:limit].to_i
+          @needs = @needs.take(params[:limit].to_i)
+        end
+
       end
+      
   end
 
 end

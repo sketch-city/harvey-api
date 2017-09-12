@@ -18,8 +18,17 @@ class Shelter < ApplicationRecord
   default_scope { where(active: !false) }
 
   geocoded_by :address
-
+  
   after_commit do
     ShelterUpdateNotifierJob.perform_later self
+  end
+
+  before_save :calculate_values
+
+  def calculate_values
+    self.calculated_needs = (volunteer_needs || "").split(",") + (supply_needs || "").split(",")
+    self.calculated_updated_at_rfc3339 = (updated_at || Time.now).in_time_zone("Central Time (US & Canada)").rfc3339
+    stripped_phone = (phone||"").gsub(/\D/,"")
+    self.calculated_phone = stripped_phone.match?(/^\d{10}$/) ? stripped_phone : "badphone"
   end
 end
