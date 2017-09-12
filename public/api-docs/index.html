@@ -71,10 +71,17 @@
 <script src="/api-docs/swagger-ui-standalone-preset.js"> </script>
 <script>
 window.onload = function() {
+  // const swaggerUiAssetPath = getAbsoluteFSPath()
+  // console.log(swaggerUiAssetPath);
 
   // Build a system
+  const origin = window.location.origin
   const ui = SwaggerUIBundle({
-    url: "https://raw.githubusercontent.com/sketchcity/harvey-api/master/swagger-v1.json",
+    // url: "./swagger-v1.json",
+    urls: [
+      {url: origin + "/api-docs/swagger-v1.json", name: "V1"},
+      {url: origin + "/api-docs/swagger-v2.json", name: "V2"}
+    ],
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
