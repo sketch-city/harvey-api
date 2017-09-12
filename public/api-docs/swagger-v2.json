@@ -18,244 +18,39 @@
   ],
   "host": "api.harveyneeds.org",
   "basePath": "/api/v2",
-  "tags": [
-    {
-      "name": "DisasterConnect",
-      "description": "Endpoints used by the DisasterConnect mobile app"
-    }
-  ],
-  "securityDefinitions": {
-    "device_uuid": {
-      "type": "apiKey",
-      "name": "DisasterConnect-Device-UUID",
-      "in": "header",
-      "description": "Each client generates and stores a device uuid when first launched.\nThis UUID should be sent in `DisasterConnect-Device-UUID` header on\nevery request.\n"
-    }
-  },
   "paths": {
-    "/connect/categories": {
+    "/routes": {
       "get": {
-        "security": [
-          {
-            "device_uuid": [
-
-            ]
-          }
-        ],
-        "tags": [
-          "DisasterConnect"
-        ],
-        "summary": "Category list",
-        "operationId": "listCategories",
-        "description": "Contains the categories, category translations, and \ncategory iconography for the DisasterConnect app.\n",
+        "summary": "Routes",
+        "operationId": "getRoutes",
+        "description": "Returns a list of organizations and legacy table names.\n",
         "produces": [
           "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "List of categories",
-            "schema": {
-              "$ref": "#/definitions/CategoriesResponse"
-            }
-          }
-        }
-      }
-    },
-    "/connect/markers": {
-      "post": {
-        "security": [
-          {
-            "device_uuid": [
-
-            ]
-          }
-        ],
-        "tags": [
-          "DisasterConnect"
-        ],
-        "summary": "adds a map marker",
-        "operationId": "addMarker",
-        "description": "Adds a map marker to the system",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "DisasterConnect-Device-UUID",
-            "type": "string",
-            "required": true,
-            "description": "The device uuid *must* be sent with this request"
-          },
-          {
-            "in": "body",
-            "name": "Marker",
-            "description": "Map marker to add",
-            "schema": {
-              "$ref": "#/definitions/Marker"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Marker created",
-            "schema": {
-              "$ref": "#/definitions/Marker"
-            }
-          },
-          "422": {
-            "description": "invalid input, object invalid",
-            "examples": {
-              "json": {
-                "categories": [
-                  "can't be blank"
-                ],
-                "marker_type": [
-                  "is not included in the list"
-                ]
-              }
-            }
-          },
-          "403": {
-            "description": "DisasterConnect-Device-UUID header is missing",
-            "examples": {
-              "json": {
-                "device_uuid": [
-                  "Must be set with DisasterConnect-Device-UUID header"
-                ]
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "security": [
-          {
-            "device_uuid": [
-
-            ]
-          }
-        ],
-        "tags": [
-          "DisasterConnect"
-        ],
-        "summary": "list the map markers",
-        "operationId": "listMarkers",
-        "description": "Lists the map marker in the system",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "DisasterConnect-Device-UUID",
-            "in": "header",
-            "type": "string",
-            "required": true,
-            "description": "The device uuid *must* be sent with this request"
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "type": "string",
-            "description": "Filter markers by category key such as `labor` or `food`.\n"
-          },
-          {
-            "name": "device_uuid",
-            "in": "query",
-            "type": "string",
-            "description": "Return only markers that you have created.\n"
-          },
-          {
-            "name": "lat",
-            "in": "query",
-            "type": "number",
-            "description": "Latitude. Filters markers that are near a location. The `lon` and `rad` parameters should also be supplied.\n"
-          },
-          {
-            "name": "lon",
-            "in": "query",
-            "type": "number",
-            "description": "Longitude. Filters markers that are near a location. The `lat` and `rad` parameters should also be supplied.\n"
-          },
-          {
-            "name": "rad",
-            "in": "query",
-            "type": "integer",
-            "description": "Radius (in miles). Filters markers that are near a location. The `lat` and `lon` parameters should also be supplied.\n"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "integer",
-            "description": "Limit the number of markers returned."
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "have need"
-            ],
-            "description": "Filter markers by type. `have` or `need`"
-          }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "examples": {
               "json": {
-                "markers": [
+                "routes": [
                   {
-                    "id": 1,
-                    "marker_type": "need",
-                    "name": "ChaiOne",
-                    "description": "testing needs",
-                    "phone": "7138675309",
-                    "categories": {
-                    },
-                    "latitude": 29.7488442,
-                    "longitude": -95.4593123,
-                    "address": "4800 Hallmark Dr, Houston, TX 77056, USA",
-                    "email": null,
-                    "data": {
-                    },
-                    "updated_at": "2017-09-04T12:28:58-05:00"
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "rescuers",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuers",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuers/help"
                   },
                   {
-                    "id": 2,
-                    "marker_type": "have",
-                    "name": "ChaiOne",
-                    "description": "testing haves",
-                    "phone": "7138675307",
-                    "categories": {
-                    },
-                    "latitude": 29.8488442,
-                    "longitude": -95.5593123,
-                    "address": "5623 Crawford Rd, Houston, TX 77041, USA",
-                    "email": null,
-                    "data": {
-                    },
-                    "updated_at": "2017-09-04T14:24:43-05:00"
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "rescuees",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuees",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuees/help"
+                  },
+                  {
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "point-of-interest",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/point-of-interest",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/point-of-interest/help"
                   }
-                ],
-                "meta": {
-                  "result_count": 2,
-                  "filters": {
-                    "limit": 2
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "DisasterConnect-Device-UUID header is missing",
-            "examples": {
-              "json": {
-                "device_uuid": [
-                  "Must be set with DisasterConnect-Device-UUID header"
                 ]
               }
             }
@@ -263,892 +58,234 @@
         }
       }
     },
-    "/connect/markers/{id}": {
-      "patch": {
-        "security": [
-          {
-            "device_uuid": [
-
-            ]
-          }
-        ],
-        "tags": [
-          "DisasterConnect"
-        ],
-        "summary": "update map marker",
-        "operationId": "updateMarker",
-        "description": "updates a marker",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+    "/{organization}/{legacy_table_name}": {
+      "get": {
+        "summary": "location index",
         "parameters": [
           {
-            "in": "header",
-            "name": "DisasterConnect-Device-UUID",
-            "type": "string",
-            "required": true,
-            "description": "The device uuid *must* be sent with this request"
-          },
-          {
+            "name": "organization",
             "in": "path",
-            "name": "id",
-            "type": "integer",
-            "required": true,
-            "description": "The marker ID."
+            "type": "string",
+            "required": true
           },
           {
-            "in": "body",
-            "name": "Marker",
-            "description": "Map marker to add",
-            "schema": {
-              "$ref": "#/definitions/Marker"
-            }
+            "name": "legacy_table_name",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
-        "responses": {
-          "201": {
-            "description": "Marker created",
-            "schema": {
-              "$ref": "#/definitions/Marker"
-            }
-          },
-          "422": {
-            "description": "invalid input, object invalid",
-            "examples": {
-              "json": {
-                "categories": [
-                  "can't be blank"
-                ],
-                "marker_type": [
-                  "is not included in the list"
-                ]
-              }
-            }
-          },
-          "403": {
-            "description": "DisasterConnect-Device-UUID header is missing",
-            "examples": {
-              "json": {
-                "device_uuid": [
-                  "Must be set with DisasterConnect-Device-UUID header"
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    "/needs": {
-      "get": {
-        "summary": "Needs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "type": "number",
-            "description": "Latitude. Returns all the needs within 100 miles of the location. `lon` parameter should be provided as well\n"
-          },
-          {
-            "name": "lon",
-            "in": "query",
-            "type": "number",
-            "description": "Longitude. Returns all the needs within 100 miles of the location. `lat` parameter should be provided as well\n"
-          },
-          {
-            "name": "location_name",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that match location name"
-          },
-          {
-            "name": "volunteers_needed",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that need volunteers"
-          },
-          {
-            "name": "supplies_needed",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that need supplies"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "integer",
-            "description": "Limit the number of results returned"
-          }
-        ],
+        "produces": "application/json",
         "responses": {
           "200": {
             "description": "OK",
             "examples": {
               "json": {
-                "needs": [
-                  {
-                    "updated_by": "Taylor",
-                    "location_name": "Dickinson High School ",
-                    "location_address": "3800 Baker Dr, Dickinson, TX 77539",
-                    "longitude": -95.0309497,
-                    "latitude": 29.468127,
-                    "contact_for_this_location_name": "Dr. Candice Dunn",
-                    "contact_for_this_location_phone_number": "(409) 771-7812",
-                    "are_volunteers_needed": true,
-                    "tell_us_about_the_volunteer_needs": "Friday, August 31st and Saturday, Sept. 1st, 10am to 7pm",
-                    "are_supplies_needed": true,
-                    "tell_us_about_the_supply_needs": "baby items, adult diapers, water, nonperishable food, cleaning supplies, hygiene products, anything but clothes, have enough clothes. Accepted between 10am-7pm",
-                    "anything_else_you_would_like_to_tell_us": "Mobile Hospital",
-                    "needs": [
-                      "Friday",
-                      " August 31st and Saturday",
-                      " Sept. 1st",
-                      " 10am to 7pm",
-                      "baby items",
-                      " adult diapers",
-                      " water",
-                      " nonperishable food",
-                      " cleaning supplies",
-                      " hygiene products",
-                      " anything but clothes",
-                      " have enough clothes. Accepted between 10am-7pm"
-                    ],
-                    "updated_at": "2017-09-03T20:47:24-05:00",
-                    "updatedAt": "2017-09-03T20:47:24-05:00",
-                    "timestamp": "2017-09-03T20:47:24-05:00",
-                    "cleanPhone": "4097717812"
-                  },
-                  {
-                    "updated_by": null,
-                    "location_name": "St. Laurence Catholic Church",
-                    "location_address": "3100 Sweetwater Blvd, Sugar Land, Texas 77479",
-                    "longitude": null,
-                    "latitude": null,
-                    "contact_for_this_location_name": null,
-                    "contact_for_this_location_phone_number": "(281) 980-9812",
-                    "are_volunteers_needed": true,
-                    "tell_us_about_the_volunteer_needs": null,
-                    "are_supplies_needed": true,
-                    "tell_us_about_the_supply_needs": null,
-                    "anything_else_you_would_like_to_tell_us": "St. Laurence is not needed as a shelter, so we are serving as a collection and distribution site for donations.",
-                    "needs": [
-
-                    ],
-                    "updated_at": "2017-09-05T16:53:11-05:00",
-                    "updatedAt": "2017-09-05T16:53:11-05:00",
-                    "timestamp": "2017-09-05T16:53:11-05:00",
-                    "cleanPhone": "2819809812"
-                  }
-                ],
-                "meta": {
-                  "result_count": 2,
-                  "filters": {
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/shelters": {
-      "get": {
-        "summary": "Shelters",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "lat",
-            "in": "query",
-            "type": "number",
-            "description": "Latitude. Returns all the shelters within 100 miles of the location. `lon` parameter should be provided as well\n"
-          },
-          {
-            "name": "lon",
-            "in": "query",
-            "type": "number",
-            "description": "Longitude. Returns all the shelters within 100 miles of the location. `lat` parameter should be provided as well\n"
-          },
-          {
-            "name": "county",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that match county name"
-          },
-          {
-            "name": "shelter",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that match shelter name"
-          },
-          {
-            "name": "accepting",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those shelters that are accepting"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "integer",
-            "description": "Limit the number of results returned"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "examples": {
-              "json": {
-                "shelters": [
-                  {
-                    "county": "Galveston",
-                    "shelter": "First Baptist Church",
-                    "address": "822 23rd St",
-                    "city": "Galveston",
-                    "pets": "",
-                    "phone": "(409) 763-1840",
-                    "accepting": false,
-                    "updated_by": "Scott",
-                    "notes": "NOT OPEN - As of 9/4/17, this facility has been closed as a shelter and donations sent out to mainland for distribution.",
-                    "volunteer_needs": "Volunteers needed: Wednesday - Saturday, 9-5",
-                    "longitude": -94.791862,
-                    "latitude": 29.301648,
-                    "supply_needs": "taking donations; need canned meat, paper towels, TP",
-                    "source": "",
-                    "needs": [
-                      "Volunteers needed: Wednesday - Saturday",
-                      " 9-5",
-                      "taking donations; need canned meat",
-                      " paper towels",
-                      " TP"
-                    ],
-                    "updated_at": "2017-09-05T13:44:24-05:00",
-                    "updatedAt": "2017-09-05T13:44:24-05:00",
-                    "last_updated": "2017-09-05T13:44:24-05:00",
-                    "cleanPhone": "4097631840"
-                  },
-                  {
-                    "county": "Montgomery",
-                    "shelter": "Woodlands Church",
-                    "address": "1 Fellowship Way",
-                    "city": "The Woodlands",
-                    "pets": "",
-                    "phone": " (281) 367-1900",
-                    "accepting": true,
-                    "updated_by": "Benny",
-                    "notes": "",
-                    "volunteer_needs": "",
-                    "longitude": -95.473728,
-                    "latitude": 30.200987,
-                    "supply_needs": "MUD OUT & CLEANING SUPPLIES NEEDED: Contractor Wheelbarrows, Safety Glasses, Power Tools (18v Dewalt Set with Batteries), 5 Gallon Buckets, ATV Ramps, Push Brooms, Crowbars, Hammers, Hand Trucks / Dollies, N95 Masks, Tyvek Suits, Box Fans, Ladders, Flat Shovels, Hard Rakes, Halogen Work Lights, Extension Cords (3-prong Type), Pinch Bars\r\nReciprocating Saw Blades, Scoop Shovels, 7-10 Gal. Wet/Dry Shop Vacs, Skil Saw with Blades, 5lb Sledge Hammer, 8lb Sledge Hammer, Squeegees, Work Gloves, Tile Scrapers, 52 pc Tool Kits, Heavy-duty Contractor Trash Bags, Backpack Sprayers, Scrub Brushes, Latex-free Rubber Gloves (S, M, L, XL), Scraper (basically a garden hoe straightened out, instead of blade at 90 degrees), First-aid Kits (Minor Cuts and Scrapes), Hacksaw Blades for Cutting Sheet Metal, Evapo Rust (Gallon Jug), Leaf Rakes, Cat's Paw (Digging Bar), Super Bar, Large Dust Pans, Pliers, Phillips & Flathead Screwdrivers, Drywall Knives and Blades, Chalk Line and Chalk, 1\" 25-30' Measuring Tapes, Post-hole Digging Bar, 12-18\" Pipe Wrench, 8\" & 12\" Adjustable-end Wrench, Wire Cutters, Channel Lock Pliers, Wisk Broom, Deck Brush, 5-in-1 Painters Tool, Pruning Loppers, Pole Saw",
-                    "source": "https://www.facebook.com/WoodlandsChurch/",
-                    "needs": [
-                      "MUD OUT & CLEANING SUPPLIES NEEDED: Contractor Wheelbarrows",
-                      " Safety Glasses",
-                      " Power Tools (18v Dewalt Set with Batteries)",
-                      " 5 Gallon Buckets",
-                      " ATV Ramps",
-                      " Push Brooms",
-                      " Crowbars",
-                      " Hammers",
-                      " Hand Trucks / Dollies",
-                      " N95 Masks",
-                      " Tyvek Suits",
-                      " Box Fans",
-                      " Ladders",
-                      " Flat Shovels",
-                      " Hard Rakes",
-                      " Halogen Work Lights",
-                      " Extension Cords (3-prong Type)",
-                      " Pinch Bars\r\nReciprocating Saw Blades",
-                      " Scoop Shovels",
-                      " 7-10 Gal. Wet/Dry Shop Vacs",
-                      " Skil Saw with Blades",
-                      " 5lb Sledge Hammer",
-                      " 8lb Sledge Hammer",
-                      " Squeegees",
-                      " Work Gloves",
-                      " Tile Scrapers",
-                      " 52 pc Tool Kits",
-                      " Heavy-duty Contractor Trash Bags",
-                      " Backpack Sprayers",
-                      " Scrub Brushes",
-                      " Latex-free Rubber Gloves (S",
-                      " M",
-                      " L",
-                      " XL)",
-                      " Scraper (basically a garden hoe straightened out",
-                      " instead of blade at 90 degrees)",
-                      " First-aid Kits (Minor Cuts and Scrapes)",
-                      " Hacksaw Blades for Cutting Sheet Metal",
-                      " Evapo Rust (Gallon Jug)",
-                      " Leaf Rakes",
-                      " Cat's Paw (Digging Bar)",
-                      " Super Bar",
-                      " Large Dust Pans",
-                      " Pliers",
-                      " Phillips & Flathead Screwdrivers",
-                      " Drywall Knives and Blades",
-                      " Chalk Line and Chalk",
-                      " 1\" 25-30' Measuring Tapes",
-                      " Post-hole Digging Bar",
-                      " 12-18\" Pipe Wrench",
-                      " 8\" & 12\" Adjustable-end Wrench",
-                      " Wire Cutters",
-                      " Channel Lock Pliers",
-                      " Wisk Broom",
-                      " Deck Brush",
-                      " 5-in-1 Painters Tool",
-                      " Pruning Loppers",
-                      " Pole Saw"
-                    ],
-                    "updated_at": "2017-09-05T16:22:17-05:00",
-                    "updatedAt": "2017-09-05T16:22:17-05:00",
-                    "last_updated": "2017-09-05T16:22:17-05:00",
-                    "cleanPhone": "2813671900"
-                  }
-                ],
-                "meta": {
-                  "result_count": 2,
-                  "filters": {
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/products": {
-      "get": {
-        "summary": "Products",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "need",
-            "in": "query",
-            "type": "string",
-            "description": "Filter products to those that match the given need\n"
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "type": "string",
-            "description": "Filter products to those that match the given category\n"
-          },
-          {
-            "name": "priority",
-            "in": "query",
-            "type": "string",
-            "description": "Filter results to those that are a priority"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "integer",
-            "description": "Limit the number of results returned"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "examples": {
-              "json": {
-                "products": [
-                  {
-                    "need": "adult diapers",
-                    "asin": "B00KXUW2GM",
-                    "amazon_title": "Always Discreet, Incontinence Underwear for Women, Maximum Classic Cut, Large, 17 Count",
-                    "detail_url": "https://www.amazon.com/Always-Discreet-Incontinence-Underwear-Maximum/dp/B00KXUW2GM?psc=1&SubscriptionId=AKIAJ5PESCDQX7KIMQ5Q&tag=oneclickrelie-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B00KXUW2GM",
-                    "priority": false,
-                    "category_specific": "Protective Briefs & Underwear",
-                    "category_general": "Health & Household",
-                    "price_in_cents": 1197,
-                    "price": "$11.97"
-                  },
-                  {
-                    "need": "adult underwears.",
-                    "asin": "B00KXUW2GM",
-                    "amazon_title": "Always Discreet, Incontinence Underwear for Women, Maximum Classic Cut, Large, 17 Count",
-                    "detail_url": "https://www.amazon.com/Always-Discreet-Incontinence-Underwear-Maximum/dp/B00KXUW2GM?psc=1&SubscriptionId=AKIAJ5PESCDQX7KIMQ5Q&tag=oneclickrelie-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B00KXUW2GM",
-                    "priority": false,
-                    "category_specific": "Protective Briefs & Underwear",
-                    "category_general": "Health & Household",
-                    "price_in_cents": 1197,
-                    "price": "$11.97"
-                  }
-                ],
-                "meta": {
-                  "filters": {
-                    "limit": 2
-                  },
-                  "result_count": 2
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/charitable_organizations": {
-      "get": {
-        "summary": "Charitable Organizations",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "services",
-            "in": "query",
-            "type": "string",
-            "description": "Filter organizations based on services\n"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "type": "string",
-            "description": "Filter organizations based on name\n"
-          },
-          {
-            "name": "food_bank",
-            "in": "query",
-            "type": "string",
-            "description": "Limit results to only food banks"
-          },
-          {
-            "name": "city",
-            "in": "query",
-            "type": "string",
-            "description": "Filter organizations based on city\n"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "integer",
-            "description": "Limit the number of results returned"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "examples": {
-              "json": {
-                "charitable_organizations": [
-
-                ],
+                "locations": [],
                 "meta": {
                   "result_count": 0,
-                  "filters": {
-                  }
+                  "filters": {}
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "Marker": {
-      "type": "object",
-      "required": [
-        "categories",
-        "latitude",
-        "longitude",
-        "marker_type",
-        "name",
-        "phone"
-      ],
-      "properties": {
-        "address": {
-          "type": "string",
-          "example": "777 Preston St, Houston, TX 77002, USA",
-          "description": "Address of the location. This will be reverse geocoded on the server if blank.\n"
-        },
-        "categories": {
-          "type": "object",
-          "description": "Holds the selected categories and associated data\n",
-          "example": {
-            "labor": [
-              "muck",
-              "rake"
-            ],
-            "housing": [
-              "for 5 people"
-            ],
-            "food": [
-              "pork cracklins"
-            ]
-          }
-        },
-        "data": {
-          "type": "object",
-          "example": {
-          },
-          "description": "Any arbitrary JSON data that needs to be included \nwith the marker.\n"
-        },
-        "description": {
-          "type": "string",
-          "example": "A description of some have or need"
-        },
-        "email": {
-          "type": "string",
-          "description": "Will be able to contact by email if provided\n",
-          "example": "me@example.com"
-        },
-        "id": {
-          "type": "integer",
-          "example": 3,
-          "description": "primary key"
-        },
-        "latitude": {
-          "type": "number",
-          "example": 29.7488442
-        },
-        "longitude": {
-          "type": "number",
-          "example": -95.4593123
-        },
-        "marker_type": {
-          "type": "string",
-          "enum": [
-            "have",
-            "need"
-          ],
-          "description": "Specifies if this marker represents a `have` or a `need`.\n"
-        },
-        "name": {
-          "type": "string",
-          "example": "Guy Smiley",
-          "description": "Name of the person at this marker\n"
-        },
-        "phone": {
-          "type": "string",
-          "description": "The phone number to contact",
-          "example": "713-867-5309"
-        },
-        "resolved": {
-          "type": "boolean",
-          "description": "Resolved markers will no longer show up on the map\n"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "int32",
-          "description": "The time this object was last updated",
-          "example": "2017-09-08T10:19:14-05:00"
-        }
-      }
     },
-    "CategoriesResponse": {
-      "type": "object",
-      "example": {
-        "categories": [
+    "/{organization}/{legacy_table_name}/help": {
+      "get": {
+        "summary": "location help",
+        "description": "Metadata for `/{organization}/{legacy_table_name} \n",
+        "parameters": [
           {
-            "labor": [
-              {
-                "muck": null
-              },
-              {
-                "trash": null
-              },
-              {
-                "clean": null
-              },
-              {
-                "shop": null
-              },
-              {
-                "laundry": null
-              },
-              {
-                "cook": null
-              },
-              {
-                "sit": null
-              },
-              {
-                "specialized": null
-              },
-              {
-                "other_labor": null
-              }
-            ]
+            "name": "organization",
+            "in": "path",
+            "type": "string",
+            "required": true
           },
           {
-            "equipment": [
-              {
-                "construction": null
-              },
-              {
-                "power_tools": null
-              },
-              {
-                "tools": null
-              },
-              {
-                "water_pump": null
-              },
-              {
-                "protective_gear": null
-              },
-              {
-                "generator": null
-              },
-              {
-                "dehumidifier": null
-              },
-              {
-                "appliances": null
-              },
-              {
-                "other_equipment": null
-              }
-            ]
-          },
-          {
-            "supplies": [
-              {
-                "construction": null
-              },
-              {
-                "home_repair": null
-              },
-              {
-                "cleaning_supplies": null
-              },
-              {
-                "household_items": null
-              },
-              {
-                "personal_care": null
-              },
-              {
-                "baby_and_child_care": null
-              },
-              {
-                "clothes": null
-              },
-              {
-                "medicine": null
-              },
-              {
-                "furniture": null
-              },
-              {
-                "fuel": null
-              },
-              {
-                "other_supplies": null
-              }
-            ]
-          },
-          {
-            "transportation": [
-              {
-                "pickup_truck": null
-              },
-              {
-                "bus_or_van": null
-              },
-              {
-                "tow_truck": null
-              },
-              {
-                "boat_motor": null
-              },
-              {
-                "boat_no_motor": null
-              },
-              {
-                "other_transportation": null
-              }
-            ]
-          },
-          {
-            "housing": [
-              {
-                "number_of_adults": 0
-              },
-              {
-                "number_of_children": 0
-              },
-              {
-                "number_of_pets": null
-              }
-            ]
-          },
-          {
-            "food": [
-              {
-                "ready_to_eat": null
-              },
-              {
-                "baby_formula": null
-              },
-              {
-                "drinking_water": null
-              },
-              {
-                "canned_food": null
-              },
-              {
-                "dry_foods": null
-              },
-              {
-                "basic_staples": null
-              }
-            ]
+            "name": "legacy_table_name",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
-        "icons": [
-          {
-            "labor": "user-md"
-          },
-          {
-            "equipment": "wrench"
-          },
-          {
-            "supplies": "shopping-basket"
-          },
-          {
-            "transportation": "car"
-          },
-          {
-            "housing": "bed"
-          },
-          {
-            "food": "cutlery"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "json": {
+                "filters": [
+                  {
+                    "name": "status",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "tier",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "high_water_vehicle_accessable",
+                    "type": "truthy",
+                    "description": "for boolean columns, returns all results that are true"
+                  },
+                  {
+                    "name": "number_of_people",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "notes",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "address",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "city",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "state",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "zip",
+                    "type": "zip",
+                    "required": true,
+                    "options": [],
+                    "description": "A zip code. Returns text. May include - for zip+4"
+                  },
+                  {
+                    "name": "phone",
+                    "type": "phone",
+                    "required": false,
+                    "options": [],
+                    "description": "A phone numbers. Returns text. May include - ( )"
+                  },
+                  {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": false,
+                    "options": [],
+                    "description": null
+                  },
+                  {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": false,
+                    "options": [],
+                    "description": null
+                  },
+                  {
+                    "name": "apartment_number",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "status",
+                    "type": "enum",
+                    "required": false,
+                    "options": [
+                      {
+                        "option": "Awaiting Rescue"
+                      },
+                      {
+                        "option": "Boat in Route"
+                      },
+                      {
+                        "option": "Rescued"
+                      }
+                    ],
+                    "description": "A enum column. Returns text limited to the values specified in options above"
+                  },
+                  {
+                    "name": "tier",
+                    "type": "enum",
+                    "required": false,
+                    "options": [
+                      {
+                        "option": "Tier 1"
+                      },
+                      {
+                        "option": "Tier 2"
+                      },
+                      {
+                        "option": "None"
+                      }
+                    ],
+                    "description": "A enum column. Returns text limited to the values specified in options above"
+                  },
+                  {
+                    "name": "high_water_vehicle_accessible",
+                    "type": "boolean",
+                    "required": false,
+                    "options": [],
+                    "description": "A boolean column. Returns boolean"
+                  },
+                  {
+                    "name": "number_of_adults",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_elderly",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_children",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_pets",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "notes",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  }
+                ]
+              }
+            }
           }
-        ],
-        "en": {
-          "categories": "Categories",
-          "labor": "Labor",
-          "muck": "Muck",
-          "trash": "Hauling Heavy Trash",
-          "clean": "Cleaning",
-          "shop": "Shopping",
-          "laundry": "Laundry",
-          "cook": "Cooking",
-          "sit": "Baby Sitting",
-          "specialized": "Specialized",
-          "medical": "Medical",
-          "home_repair": "Home Repair",
-          "electrician": "Electrician",
-          "legal": "Legal",
-          "pest_control": "Pest or Animal Control",
-          "counselor": "Counselor",
-          "other_specialized": "Other Specialized Labor",
-          "other_labor": "Other Labor",
-          "equipment": "Equipment",
-          "construction": "Construction",
-          "power_tools": "Power Tools",
-          "tools": "Tools",
-          "water_pump": "Water Pumps",
-          "protective_gear": "Protective Gear",
-          "generator": "Generators",
-          "dehumidifier": "Dehumidifier",
-          "appliances": "Appliances",
-          "other_equipment": "Other Equipment",
-          "supplies": "Supplies",
-          "cleaning_supplies": "Cleaning Supplies",
-          "household_items": "Household Items",
-          "personal_care": "Personal Care",
-          "baby_and_child_care": "Baby & Child Care",
-          "clothes": "Clothes",
-          "medicine": "Medicine",
-          "furniture": "Furniture",
-          "fuel": "Fuel",
-          "other_supplies": "Other Supplies",
-          "transportation": "Transportation",
-          "pickup_truck": "Pickup Truck",
-          "bus_or_van": "Bus or Van",
-          "tow_truck": "Tow Truck",
-          "boat_motor": "Boat (motor)",
-          "boat_no_motor": "Boat (no motor)",
-          "other_transportation": "Other Transportation",
-          "housing": "Housing",
-          "number_of_adults": "Number of Adults",
-          "number_of_children": "Number of Children",
-          "number_of_pets": "Number of Pets",
-          "dog": "Dog",
-          "cat": "Cat",
-          "other": "Other",
-          "food": "Food",
-          "ready_to_eat": "Ready to Eat",
-          "baby_formula": "Baby Formula",
-          "drinking_water": "Drinking Water",
-          "canned_food": "Canned Food",
-          "dry_foods": "Dry Foods",
-          "basic_staples": "Basic Staples"
-        },
-        "es": {
-          "categories": "Categories",
-          "labor": "Labor",
-          "muck": "Muck",
-          "trash": "Hauling Heavy Trash",
-          "clean": "Cleaning",
-          "shop": "Shopping",
-          "laundry": "Laundry",
-          "cook": "Cooking",
-          "sit": "Baby Sitting",
-          "specialized": "Specialized",
-          "medical": "Medical",
-          "home_repair": "Home Repair",
-          "electrician": "Electrician",
-          "legal": "Legal",
-          "pest_control": "Pest or Animal Control",
-          "counselor": "Counselor",
-          "other_specialized": "Other Specialized Labor",
-          "other_labor": "Other Labor",
-          "equipment": "Equipment",
-          "construction": "Construction",
-          "power_tools": "Power Tools",
-          "tools": "Tools",
-          "water_pump": "Water Pumps",
-          "protective_gear": "Protective Gear",
-          "generator": "Generators",
-          "dehumidifier": "Dehumidifier",
-          "appliances": "Appliances",
-          "other_equipment": "Other Equipment",
-          "supplies": "Supplies",
-          "cleaning_supplies": "Cleaning Supplies",
-          "household_items": "Household Items",
-          "personal_care": "Personal Care",
-          "baby_and_child_care": "Baby & Child Care",
-          "clothes": "Clothes",
-          "medicine": "Medicine",
-          "furniture": "Furniture",
-          "fuel": "Fuel",
-          "other_supplies": "Other Supplies",
-          "transportation": "Transportation",
-          "pickup_truck": "Pickup Truck",
-          "bus_or_van": "Bus or Van",
-          "tow_truck": "Tow Truck",
-          "boat_motor": "Boat (motor)",
-          "boat_no_motor": "Boat (no motor)",
-          "other_transportation": "Other Transportation",
-          "housing": "Housing",
-          "number_of_adults": "Number of Adults",
-          "number_of_children": "Number of Children",
-          "number_of_pets": "Number of Pets",
-          "dog": "Dog",
-          "cat": "Cat",
-          "other": "Other",
-          "food": "Food",
-          "ready_to_eat": "Ready to Eat",
-          "baby_formula": "Baby Formula",
-          "drinking_water": "Drinking Water",
-          "canned_food": "Canned Food",
-          "dry_foods": "Dry Foods",
-          "basic_staples": "Basic Staples"
         }
       }
     }
