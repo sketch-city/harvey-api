@@ -1,0 +1,293 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v2",
+    "title": "HarveyNeeds API",
+    "description": "We help client applications help those affeceted by Hurricane Harvey.",
+    "contact": {
+      "name": "API Support",
+      "url": "https://github.com/sketch-city/harvey-api/issues/new"
+    },
+    "license": {
+      "name": "GPLv3",
+      "url": "https://github.com/sketch-city/harvey-api/blob/master/LICENSE"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "api.harveyneeds.org",
+  "basePath": "/api/v2",
+  "paths": {
+    "/routes": {
+      "get": {
+        "summary": "Routes",
+        "operationId": "getRoutes",
+        "description": "Returns a list of organizations and legacy table names.\n",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "json": {
+                "routes": [
+                  {
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "rescuers",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuers",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuers/help"
+                  },
+                  {
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "rescuees",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuees",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/rescuees/help"
+                  },
+                  {
+                    "organization": "hurricane-harvey-rescue-dispatchers",
+                    "legacy_table_name": "point-of-interest",
+                    "api_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/point-of-interest",
+                    "api_help_url": "https://api.harveyneeds.org/api/v2/hurricane-harvey-rescue-dispatchers/point-of-interest/help"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{organization}/{legacy_table_name}": {
+      "get": {
+        "summary": "location index",
+        "parameters": [
+          {
+            "name": "organization",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "legacy_table_name",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "produces": "application/json",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "json": {
+                "locations": [],
+                "meta": {
+                  "result_count": 0,
+                  "filters": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{organization}/{legacy_table_name}/help": {
+      "get": {
+        "summary": "location help",
+        "description": "Metadata for `/{organization}/{legacy_table_name} \n",
+        "parameters": [
+          {
+            "name": "organization",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "legacy_table_name",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "json": {
+                "filters": [
+                  {
+                    "name": "status",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "tier",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "high_water_vehicle_accessable",
+                    "type": "truthy",
+                    "description": "for boolean columns, returns all results that are true"
+                  },
+                  {
+                    "name": "number_of_people",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  },
+                  {
+                    "name": "notes",
+                    "type": "string",
+                    "description": "Searches the specified column for the supplied value, case insensitive"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "address",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "city",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "state",
+                    "type": "string",
+                    "required": true,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "zip",
+                    "type": "zip",
+                    "required": true,
+                    "options": [],
+                    "description": "A zip code. Returns text. May include - for zip+4"
+                  },
+                  {
+                    "name": "phone",
+                    "type": "phone",
+                    "required": false,
+                    "options": [],
+                    "description": "A phone numbers. Returns text. May include - ( )"
+                  },
+                  {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": false,
+                    "options": [],
+                    "description": null
+                  },
+                  {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": false,
+                    "options": [],
+                    "description": null
+                  },
+                  {
+                    "name": "apartment_number",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "status",
+                    "type": "enum",
+                    "required": false,
+                    "options": [
+                      {
+                        "option": "Awaiting Rescue"
+                      },
+                      {
+                        "option": "Boat in Route"
+                      },
+                      {
+                        "option": "Rescued"
+                      }
+                    ],
+                    "description": "A enum column. Returns text limited to the values specified in options above"
+                  },
+                  {
+                    "name": "tier",
+                    "type": "enum",
+                    "required": false,
+                    "options": [
+                      {
+                        "option": "Tier 1"
+                      },
+                      {
+                        "option": "Tier 2"
+                      },
+                      {
+                        "option": "None"
+                      }
+                    ],
+                    "description": "A enum column. Returns text limited to the values specified in options above"
+                  },
+                  {
+                    "name": "high_water_vehicle_accessible",
+                    "type": "boolean",
+                    "required": false,
+                    "options": [],
+                    "description": "A boolean column. Returns boolean"
+                  },
+                  {
+                    "name": "number_of_adults",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_elderly",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_children",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "number_of_pets",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  },
+                  {
+                    "name": "notes",
+                    "type": "string",
+                    "required": false,
+                    "options": [],
+                    "description": "A string column. Returns text."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
