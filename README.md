@@ -15,6 +15,7 @@ Example Clients:
 Developer Links
 -----
 
+* [API DOCUMENTATION](https://api.harveyneeds.org/api-docs)
 * [CONTRIBUTORS](https://api.harveyneeds.org/contributors.html)
 * [LICENSE](#license)
 * [CODE OF CONDUCT](CODE_OF_CONDUCT.md)
