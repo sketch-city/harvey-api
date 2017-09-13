@@ -25,4 +25,16 @@ class NeedTest < ActiveSupport::TestCase
     assert_equal 2, array.length
     assert_equal "cleaning supplies", array.last
   end
+
+  test "reports sufficient info for map when lat and lon present" do
+    need = Need.new(latitude: 1, longitude: 1)
+
+    assert_equal need.has_sufficient_data_for_map?, true
+  end
+
+  test "reports not sufficient info for map when lat or lon absent" do
+    need = Need.new(latitude: nil, longitude: nil)
+
+    assert_equal need.has_sufficient_data_for_map?, false
+  end
 end
