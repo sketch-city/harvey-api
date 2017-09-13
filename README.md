@@ -83,8 +83,19 @@ User.create! email: "youremail@example.com", password: "yourpassword", admin: tr
 
 * GOOGLE_GEOCODER_API_KEY = Geocoding with Google Maps API, get
   [one](https://console.developers.google.com/flows/enableapi?apiid=geocoding_backend&keyType=SERVER_SIDE)
+* GOOGLE_MAPS_JS_API_KEY = API key to show gmaps in views.  See `<script>` at end of body in application.html.erb
+  * Can be exactly the same as GOOGLE_GEOCODER_API_KEY
+
+  * If you see error "Google Maps API error: ApiNotActivatedMapError" in your console, to activate:
+    1. click above link to google developer console
+    2. In left menu, click "Dashboard"
+    3. In header, click "Enable APIs and Services"
+    4. Search for "maps", select option for "Google Maps JavaScript API"
+    5. In header, click "Enable"
+
 * AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY = Product Advertising API, see
   below
+
 
 Note: this is optional; currently only needed to fetch new Amazon products from
 the Amazon Product Advertising API
