@@ -56,7 +56,7 @@ Getting Started (Dev)
 -------
 #### Prequisites
 * Ruby 2.4.1
-* Rails 5.1.
+* Rails 5.1
 
 #### User Administration
 In `rails console` you'll want to create an admin user:

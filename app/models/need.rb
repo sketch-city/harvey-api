@@ -33,4 +33,8 @@ class Need < ApplicationRecord
     stripped_phone = (contact_for_this_location_phone_number||"").gsub(/\D/,"")
     self.calculated_phone = stripped_phone.match?(/^\d{10}$/) ? stripped_phone : "badphone"
   end
+
+  def has_sufficient_data_for_map?
+    latitude.present? and longitude.present?
+  end
 end

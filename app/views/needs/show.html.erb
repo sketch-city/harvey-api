@@ -14,17 +14,19 @@
     <div class="column">
       <%= render "shared/show", record: @need, headers: @headers, columns: @columns %>
     </div>
-    <div class="column">
-      <div id="map" style="height: 300px; width: 100%"></div>
-      <script>
-        $(window).ready(function(){
-          simpleMap({
-            selector: "#map",
-            name: "<%= j @need.location_name %>",
-            lat: <%= @need.latitude || 0 %>,
-            lng: <%= @need.longitude || 0 %>
+    <% if @need.has_sufficient_data_for_map? %>
+      <div class="column">
+        <div id="map" style="height: 300px; width: 100%"></div>
+        <script>
+          $(window).ready(function(){
+            simpleMap({
+              selector: "#map",
+              name: "<%= j @need.location_name %>",
+              lat: <%= @need.latitude || 0 %>,
+              lng: <%= @need.longitude || 0 %>
+            })
           })
-        })
-      </script>
-    </div>
+        </script>
+      </div>
+    <% end %>
   </div>
