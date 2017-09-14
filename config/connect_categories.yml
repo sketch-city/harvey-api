@@ -50,12 +50,12 @@ default: &default
   icons:
     # Category keys that need icons will have their
     # corresponding icon key listed here
-    - labor: user-md
-    - equipment: wrench
-    - supplies: shopping-basket
-    - transportation: car
-    - housing: bed
-    - food: cutlery
+    labor: user-md
+    equipment: wrench
+    supplies: shopping-basket
+    transportation: car
+    housing: bed
+    food: cutlery
   en:
     categories: Categories
     labor: Labor

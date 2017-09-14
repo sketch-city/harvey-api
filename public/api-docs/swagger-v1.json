@@ -1017,26 +1017,14 @@
             ]
           }
         ],
-        "icons": [
-          {
-            "labor": "user-md"
-          },
-          {
-            "equipment": "wrench"
-          },
-          {
-            "supplies": "shopping-basket"
-          },
-          {
-            "transportation": "car"
-          },
-          {
-            "housing": "bed"
-          },
-          {
-            "food": "cutlery"
-          }
-        ],
+        "icons": {
+          "labor": "user-md",
+          "equipment": "wrench",
+          "supplies": "shopping-basket",
+          "transportation": "car",
+          "housing": "bed",
+          "food": "cutlery"
+        },
         "en": {
           "categories": "Categories",
           "labor": "Labor",
