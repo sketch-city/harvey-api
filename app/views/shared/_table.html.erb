@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to 'Show', row %> / <%= link_to 'Update', [:edit, row] %></td>
         <% columns.each do |column| %>
-          <td><%= truncate(row.send(column).to_s) %></td>
+          <td><%= truncate(row.public_send(column).to_s) %></td>
         <% end %>
       </tr>
     <% end %>

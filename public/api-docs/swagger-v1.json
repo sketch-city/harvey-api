@@ -367,7 +367,9 @@
             "in": "body",
             "name": "reason",
             "description": "The reason why this marker should be removed",
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Flag"
+            }
           }
         ],
         "responses": {
@@ -814,6 +816,19 @@
     }
   },
   "definitions": {
+    "Flag": {
+      "type": "object",
+      "required": [
+        "reason"
+      ],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "example": "I find this content highly offensive",
+          "description": "The reason why this marker is being flagged.\n"
+        }
+      }
+    },
     "Marker": {
       "type": "object",
       "required": [
