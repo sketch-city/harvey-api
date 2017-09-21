@@ -37,9 +37,7 @@
       "get": {
         "security": [
           {
-            "device_uuid": [
-
-            ]
+            "device_uuid": []
           }
         ],
         "tags": [
@@ -65,9 +63,7 @@
       "post": {
         "security": [
           {
-            "device_uuid": [
-
-            ]
+            "device_uuid": []
           }
         ],
         "tags": [
@@ -106,6 +102,16 @@
               "$ref": "#/definitions/Marker"
             }
           },
+          "403": {
+            "description": "DisasterConnect-Device-UUID header is missing",
+            "examples": {
+              "json": {
+                "device_uuid": [
+                  "Must be set with DisasterConnect-Device-UUID header"
+                ]
+              }
+            }
+          },
           "422": {
             "description": "invalid input, object invalid",
             "examples": {
@@ -118,25 +124,13 @@
                 ]
               }
             }
-          },
-          "403": {
-            "description": "DisasterConnect-Device-UUID header is missing",
-            "examples": {
-              "json": {
-                "device_uuid": [
-                  "Must be set with DisasterConnect-Device-UUID header"
-                ]
-              }
-            }
           }
         }
       },
       "get": {
         "security": [
           {
-            "device_uuid": [
-
-            ]
+            "device_uuid": []
           }
         ],
         "tags": [
@@ -214,14 +208,12 @@
                     "name": "ChaiOne",
                     "description": "testing needs",
                     "phone": "7138675309",
-                    "categories": {
-                    },
+                    "categories": {},
                     "latitude": 29.7488442,
                     "longitude": -95.4593123,
                     "address": "4800 Hallmark Dr, Houston, TX 77056, USA",
                     "email": null,
-                    "data": {
-                    },
+                    "data": {},
                     "updated_at": "2017-09-04T12:28:58-05:00"
                   },
                   {
@@ -230,14 +222,12 @@
                     "name": "ChaiOne",
                     "description": "testing haves",
                     "phone": "7138675307",
-                    "categories": {
-                    },
+                    "categories": {},
                     "latitude": 29.8488442,
                     "longitude": -95.5593123,
                     "address": "5623 Crawford Rd, Houston, TX 77041, USA",
                     "email": null,
-                    "data": {
-                    },
+                    "data": {},
                     "updated_at": "2017-09-04T14:24:43-05:00"
                   }
                 ],
@@ -267,9 +257,7 @@
       "patch": {
         "security": [
           {
-            "device_uuid": [
-
-            ]
+            "device_uuid": []
           }
         ],
         "tags": [
@@ -315,6 +303,16 @@
               "$ref": "#/definitions/Marker"
             }
           },
+          "403": {
+            "description": "DisasterConnect-Device-UUID header is missing",
+            "examples": {
+              "json": {
+                "device_uuid": [
+                  "Must be set with DisasterConnect-Device-UUID header"
+                ]
+              }
+            }
+          },
           "422": {
             "description": "invalid input, object invalid",
             "examples": {
@@ -327,6 +325,54 @@
                 ]
               }
             }
+          }
+        }
+      }
+    },
+    "/connect/markers/{marker_id}/flag": {
+      "post": {
+        "security": [
+          {
+            "device_uuid": []
+          }
+        ],
+        "tags": [
+          "DisasterConnect"
+        ],
+        "summary": "flag a marker for inappropriate content",
+        "operationId": "flagMarker",
+        "description": "flags a marker that contains inappropriate or objectionable material. Flagged markers will be hidden until reviewed by an admin.\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "DisasterConnect-Device-UUID",
+            "type": "string",
+            "required": true,
+            "description": "The device uuid *must* be sent with this request"
+          },
+          {
+            "in": "path",
+            "name": "marker_id",
+            "type": "integer",
+            "required": true,
+            "description": "The marker ID."
+          },
+          {
+            "in": "body",
+            "name": "reason",
+            "description": "The reason why this marker should be removed",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The marker has been flagged. The response will be empty."
           },
           "403": {
             "description": "DisasterConnect-Device-UUID header is missing",
@@ -386,9 +432,6 @@
           }
         ],
         "responses": {
-          "304": {
-            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
-          },
           "200": {
             "description": "OK",
             "examples": {
@@ -441,9 +484,7 @@
                     "are_supplies_needed": true,
                     "tell_us_about_the_supply_needs": null,
                     "anything_else_you_would_like_to_tell_us": "St. Laurence is not needed as a shelter, so we are serving as a collection and distribution site for donations.",
-                    "needs": [
-
-                    ],
+                    "needs": [],
                     "updated_at": "2017-09-05T16:53:11-05:00",
                     "updatedAt": "2017-09-05T16:53:11-05:00",
                     "timestamp": "2017-09-05T16:53:11-05:00",
@@ -452,11 +493,13 @@
                 ],
                 "meta": {
                   "result_count": 2,
-                  "filters": {
-                  }
+                  "filters": {}
                 }
               }
             }
+          },
+          "304": {
+            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
           }
         }
       }
@@ -506,9 +549,6 @@
           }
         ],
         "responses": {
-          "304": {
-            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
-          },
           "200": {
             "description": "OK",
             "examples": {
@@ -626,11 +666,13 @@
                 ],
                 "meta": {
                   "result_count": 2,
-                  "filters": {
-                  }
+                  "filters": {}
                 }
               }
             }
+          },
+          "304": {
+            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
           }
         }
       }
@@ -668,9 +710,6 @@
           }
         ],
         "responses": {
-          "304": {
-            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
-          },
           "200": {
             "description": "OK",
             "examples": {
@@ -709,6 +748,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
           }
         }
       }
@@ -752,23 +794,20 @@
           }
         ],
         "responses": {
-          "304": {
-            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
-          },
           "200": {
             "description": "OK",
             "examples": {
               "json": {
-                "charitable_organizations": [
-
-                ],
+                "charitable_organizations": [],
                 "meta": {
                   "result_count": 0,
-                  "filters": {
-                  }
+                  "filters": {}
                 }
               }
             }
+          },
+          "304": {
+            "description": "NOT MODIFIED\nThe content has not changed since the last time the end point was called. No data is returned and the client can rerender the previously cached content. The client must send a `If-Modified-Since` or `If-None-Match` header in for the server to respond with a 304."
           }
         }
       }
@@ -809,8 +848,7 @@
         },
         "data": {
           "type": "object",
-          "example": {
-          },
+          "example": {},
           "description": "Any arbitrary JSON data that needs to be included \nwith the marker.\n"
         },
         "description": {

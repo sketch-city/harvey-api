@@ -9,12 +9,21 @@ class Api::V1::Connect::MarkersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "returns all unresolved markers" do
-    count = Connect::Marker.unresolved.count
+    count = Connect::Marker.unresolved.not_flagged.count
     get api_v1_connect_markers_path, headers: default_headers
     json = JSON.parse(response.body)
     assert_equal count, json["markers"].length
     assert_equal count, json["meta"]["result_count"]
     assert json["markers"][0].key?("email")
+  end
+
+  test "does not return any flagged markers" do
+    flagged_ids = Connect::Marker.unresolved.flagged.pluck(:id)
+    assert_not_empty(flagged_ids, "No flagged markers to test")
+    get api_v1_connect_markers_path, headers: default_headers
+    json = JSON.parse(response.body)
+    result_ids = json["markers"].map { |m| m.fetch("id") }
+    assert_equal result_ids - flagged_ids, result_ids
   end
 
   test "can limit the number of markers returned" do

@@ -85,6 +85,14 @@ class Connect::MarkerTest < ActiveSupport::TestCase
     assert Connect::Marker.by_device_uuid(@marker.device_uuid).all? { |m| m.device_uuid == @marker.device_uuid }
   end
 
+  test 'scope flagged' do
+    assert Connect::Marker.flagged.all? { |m| m.data.key?('inappropriate_flag') }
+  end
+
+  test 'scope not_flagged' do
+    assert Connect::Marker.not_flagged.none? { |m| m.data.key?('inappropriate_flag') }
+  end
+
   test 'scope by type' do
     assert Connect::Marker.by_type(@marker.marker_type).all? { |m| m.marker_type == @marker.marker_type }
   end
@@ -95,5 +103,18 @@ class Connect::MarkerTest < ActiveSupport::TestCase
 
   test 'scope unresolved' do
     assert Connect::Marker.unresolved.none? { |m| m.resolved }
+  end
+
+  test 'can flag a marker as inappropriate' do
+    refute @marker.flagged_inappropriate?
+    @marker.flag_as_inappropriate! device_uuid: 'xyz', reason: 'dirty birdy'
+    assert @marker.flagged_inappropriate?
+  end
+
+  test 'can clear an inappropriate flag' do
+    @marker.flag_as_inappropriate! device_uuid: 'xyz', reason: 'dirty birdy'
+    assert @marker.flagged_inappropriate?
+    @marker.clear_inappropriate_flag!
+    refute @marker.flagged_inappropriate?
   end
 end
