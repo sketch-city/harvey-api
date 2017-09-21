@@ -1,0 +1,35 @@
+<h1>Marker <%= @flagged_marker.id %></h1>
+
+<%= link_to 'Confirm', connect_flagged_marker_path(@flagged_marker),
+            method: :patch,
+            title: "Confirm that this marker is inappropriate",
+            class: "button button-outline" %> |
+<%= link_to 'Clear', connect_flagged_marker_path(@flagged_marker),
+              method: :delete,
+              title: "This marker is fine and should not have been flagged",
+              class: "button button-outline" %> |
+<%= link_to 'Back', connect_flagged_markers_path, class: "button button-outline" %>
+
+<div class="row">
+  <div class="column">
+    <p><strong>Flagged At:</strong> <%= @flagged_marker.flagged_at %></p>
+    <p><strong>Flagged For:</strong> <%= @flagged_marker.flagged_for %></p>
+    <p><strong>Flagged By:</strong> <%= @flagged_marker.flagged_by %></p>
+
+    <h4>Marker Details</h4>
+    <pre><code><%= JSON.pretty_generate @flagged_marker.as_json %></code></pre>
+  </div>
+  <div class="column">
+    <div id="map" style="height: 300px; width: 100%"></div>
+    <script>
+      $(window).ready(function(){
+        simpleMap({
+          selector: "#map",
+          name: "<%= j @flagged_marker.name %>",
+          lat: <%= @flagged_marker.latitude || 0%>,
+          lng: <%= @flagged_marker.longitude || 0%>
+        })
+      })
+    </script>
+  </div>
+</div>

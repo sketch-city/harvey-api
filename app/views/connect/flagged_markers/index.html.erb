@@ -1,0 +1,42 @@
+<h1>Flagged Markers</h1>
+
+<p>
+  These are map markers from the <a href="http://disasterconnect.io/">Disaster Connect app</a>
+  that users have flagged as inappropriate. Markers that have been flagged will be hidden from
+  public view in the apps.
+</p>
+<p>
+  As an admin, you have the ability to clear the flag, which will enable the public to view the
+  marker again. Or, you can confirm that the marker is inappropriate and it will remain hidden
+  from public view and this screen as well.
+</p>
+
+<table id="data-table" class="shared-table">
+  <thead>
+    <tr>
+      <th></th>
+      <% fields.map(&:titleize).each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flagged_markers.each do |row| %>
+      <tr>
+        <td><%= link_to 'Show', connect_flagged_marker_path(row) %></td>
+        <% fields.each do |field| %>
+          <td><%= truncate(row.public_send(field).to_s) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+window.onload = function() {
+  $('#data-table').DataTable({
+    "order": [[ 1, "desc" ]]
+  });
+};
+</script>

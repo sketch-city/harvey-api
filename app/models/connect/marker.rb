@@ -41,7 +41,19 @@ module Connect
 
     def clear_inappropriate_flag!
       data.delete('inappropriate_flag')
-      save
+      save!
+    end
+
+    def flagged_by
+      data.dig 'inappropriate_flag', 'flagged_by'
+    end
+
+    def flagged_for
+      data.dig 'inappropriate_flag', 'flagged_for'
+    end
+
+    def flagged_at
+      data.dig 'inappropriate_flag', 'flagged_at'
     end
   end
 end

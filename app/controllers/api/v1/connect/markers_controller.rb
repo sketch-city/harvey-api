@@ -15,7 +15,7 @@ module Api
         def create
           @marker = ::Connect::Marker.new(marker_params.merge(device_uuid: device_uuid))
           if @marker.save
-            render :show, status: :created, location: @marker
+            render :show, status: :created, location: api_v1_connect_marker_url(@marker)
           else
             render json: @marker.errors, status: :unprocessable_entity
           end
@@ -24,7 +24,7 @@ module Api
         def update
           @marker = ::Connect::Marker.find_by!(id: params[:id], device_uuid: device_uuid)
           if @marker.update(marker_params)
-            render :show, status: :ok, location: @marker
+            render :show, status: :ok, location: api_v1_connect_marker_url(@marker)
           else
             render json: @marker.errors, status: :unprocessable_entity
           end
