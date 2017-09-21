@@ -59,3 +59,32 @@ resolved:
   resolved: true
   latitude: 29.776
   longitude: -95.3587
+
+flagged:
+  device_uuid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  marker_type: need
+  name: Dirty Birdy
+  description: Some really offensive content
+  phone: 713-867-5309
+  categories:
+    foo: bar
+  resolved: false
+  latitude: 29.773700
+  longitude: -95.358611
+  data:
+    inappropriate_flag:
+      flagged_by: yyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
+      flagged_for: Frankly I find the idea of a bug that thinks offensive
+      flagged_at: <%= Time.zone.now %>
+
+offensive:
+  device_uuid: zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
+  marker_type: need
+  name: Dirty Birdy
+  description: I need to be a jerk
+  phone: 713-867-5309
+  categories:
+    foo: bar
+  resolved: false
+  latitude: 29.773700
+  longitude: -95.358611

@@ -34,7 +34,9 @@ Rails.application.routes.draw do
       get "/charitable_organizations" => 'charitable_organizations#index'
 
       namespace :connect do
-        resources :markers, only: [:create, :index, :update]
+        resources :markers, only: [:create, :index, :update] do
+          resource :flag, only: :create
+        end
         resources :categories, only: [:index]
       end
     end
