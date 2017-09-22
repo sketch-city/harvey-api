@@ -110,58 +110,58 @@ default: &default
     dry_foods: Dry Foods
     basic_staples: Basic Staples
   es:
-    categories: I need help with
+    categories: Necesito ayuda con
     labor: Labor
-    muck: Mucking
-    trash: Hauling Heavy Trash
-    clean: Cleaning
-    shop: Shopping
-    laundry: Laundry
-    cook: Cooking
-    sit: Baby Sitting
-    medical: Healthcare
-    home_repair: Home Repair
-    electrician: Electrical Issues
-    legal: Legal Issues
-    pest_control: Pest or Animal Control
-    counselor: Counseling
-    equipment: Equipment
-    construction: Construction
-    power_tools: Power Tools
-    tools: Tools
-    water_pump: Water Pumps
-    protective_gear: Protective Gear
-    generator: Generators
-    dehumidifier: Dehumidifiers
-    appliances: Appliances
-    other_equipment: Other Equipment
-    supplies: Supplies
-    cleaning_supplies: Cleaning Supplies
-    household_items: Household Items
-    personal_care: Personal Care
-    baby_and_child_care: Baby & Child Care
-    clothes: Clothes
-    medicine: Medicine
-    furniture: Furniture
-    fuel: Fuel
-    transportation: Transportation
-    pickup_truck: Pickup Truck
-    bus_or_van: Bus or Van
-    tow_truck: Tow Truck
-    boat_motor: Boat (motor)
-    boat_no_motor: Boat (no motor)
-    car: Car
-    housing: Housing
-    family: Family Housing
-    individual: Individual Housing
-    pets: Pet Housing
-    food: Food
-    ready_to_eat: Ready to Eat Food
-    baby_formula: Baby Formula
-    drinking_water: Drinking Water
-    canned_food: Canned Food
-    dry_foods: Dry Foods
-    basic_staples: Basic Staples
+    muck: Limpieza
+    trash: Retirar escombros/basura
+    clean: Limpiar
+    shop: Comprar
+    laundry: Lavar
+    cook: Cocinar
+    sit: Cuidar niños
+    medical: Ayuda medica
+    home_repair: Reparaciones
+    electrician: Problemas electricos
+    legal: Problemas legales
+    pest_control: Control de animales/pestes
+    counselor: Terapia
+    equipment: Equipo
+    construction: Construccion
+    power_tools: Herramientas electricas
+    tools: Herramientas
+    water_pump: Bomba de agua
+    protective_gear: Equipo de protección
+    generator: Generadores
+    dehumidifier: Deshumidificadores
+    appliances: Aparatos del hogar
+    other_equipment: Equipo en general
+    supplies: Suministros
+    cleaning_supplies: Suministros de limpieza
+    household_items: Articulos del hogar
+    personal_care: Cuidado personal
+    baby_and_child_care: Cuidado de niños/bebes
+    clothes: Ropa
+    medicine: Medicina
+    furniture: Muebles
+    fuel: Combustible
+    transportation: Transportacion
+    pickup_truck: Camioneta
+    bus_or_van: Camion
+    tow_truck: Remolque
+    boat_motor: Barco (motor)
+    boat_no_motor: Barco (sin motor)
+    car: Coche
+    housing: Hospedaje
+    family: Hospedaje familiar
+    individual: Hospedaje individual
+    pets: Hospedaje para mascotas
+    food: Alimento
+    ready_to_eat: Alimentos rapidos
+    baby_formula: Alimentos para bebe
+    drinking_water: Agua potable
+    canned_food: Comida enlatada
+    dry_foods: Comida seca
+    basic_staples: Comida basica
 
 development:
   <<: *default
