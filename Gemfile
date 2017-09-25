@@ -26,6 +26,7 @@ gem "httparty", "~> 0.15.6"
 gem 'redis', '~> 3.2'
 gem 'simple_form'
 gem 'redcarpet'
+gem 'webpacker', '~> 3.0'
 
 group :development, :test do
   gem 'capybara', '~> 2.13'

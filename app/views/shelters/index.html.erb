@@ -25,6 +25,33 @@
   })
 </script>
 
-<%= link_to 'Add New Shelter', new_shelter_path, class: "button button-outline" %>
+<div class="row">
+  <div class="column">
+    <%= link_to 'Add New Shelter', new_shelter_path, class: "button button-outline" %>
+  </div>
+  <div class="column column-20 column-offset-40" style="text-align: right">
+    <%= link_to 'View Map', map_shelters_path, class: "button button-outline" %>
+    <label>Embed Code:</label>
+    <div>
+      <input type="text" style="width: 100px" id="embed-shelter" value="<object id='shelter_map' type='text/html' data='<%= map_shelters_url %>' height='550px' width='100%'></object>"/>
+      <a class="btn"  id="embed-shelter-button" data-clipboard-target="#embed-shelter">
+        <%= image_tag "clippy.svg", alt: "Copy to clipboard", style: "width: 30px; height: 30px" %>
+      </a>
+    </div>
+
+    <script type="text/javascript">
+      var clipboard = new Clipboard("#embed-shelter-button")
+        clipboard.on('success', function(e) {
+          console.info('Action:', e.action);
+          console.info('Text:', e.text);
+          console.info('Trigger:', e.trigger);
+
+          e.clearSelection();
+          document.querySelector("#embed-shelter-button").remove()
+    });
+    </script>
+  </div>
+</div>
+
 
 <%= render "shared/table", rows: @shelters, headers: @headers, columns: @columns %>

@@ -1,0 +1,30 @@
+.filters {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #9b4dca;
+  color: white;
+
+  input,
+  input::placeholder {
+    color: white;
+  }
+  input:focus {
+    border-color: white;
+  }
+
+  .button-outline {
+    background: white;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .filters {
+    flex-wrap: wrap;
+    h1 {
+      text-align: center;
+    }
+  }
+}
