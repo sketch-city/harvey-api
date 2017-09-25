@@ -8,6 +8,7 @@ class SheltersController < ApplicationController
   end
 
   def map
+    response.headers.delete('X-Frame-Options')
     render layout: 'embed'
   end
 
