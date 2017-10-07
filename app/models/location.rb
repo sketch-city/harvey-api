@@ -142,7 +142,7 @@ class Location < ApplicationRecord
     # - :string
     # - :boolean, looks for true/false and yes/no, blanks are preserved as nil
     # - :enum, looks for true/false and yes/no, blanks are preserved as nil
-    # column: string, the name of the column in the google sheet.
+    # legacy_column: string, the name of the column in the google sheet.
     # display: boolean, whether to display the field in the table and show pages, default true
     # updatable: boolean, whether to display the field in the form, default true
     # admin_only: boolean, if true only admins may view the data, if set to true overrides display
