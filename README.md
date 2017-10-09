@@ -6,6 +6,7 @@ The Harvey Needs API
 
 Example Clients:
 
+* https://www.houstonshelters.org
 * https://sketch-city.github.io/harvey-needs/
 * https://www.texasrescuemap.com/muckmap
 * https://www.texasrescuemap.com
