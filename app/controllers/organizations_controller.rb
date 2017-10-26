@@ -5,6 +5,8 @@ class OrganizationsController < ApplicationController
   def show
     @organization = params[:organization]
     @organization_tables = Location::Whitelist.organization_tables(@organization)
-    redirect_to root_path if !@organization_tables.present?
+    if !@organization_tables.present?
+      redirect_to root_path, notice: "Unable to find organization."
+    end
   end
 end

@@ -14,6 +14,8 @@ class Location
     end
 
     def self.organization_tables(organization)
+      return nil if LocationsMap[organization].nil?
+
       keys = LocationsMap[organization].keys.sort
       keys.map { |key| LocationsMap[organization][key] }
     end
