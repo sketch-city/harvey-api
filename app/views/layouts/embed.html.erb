@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @application_name %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+
+    <% if notice %><p id="notice"><%= notice %></p><% end %>
+    <% if alert %><p id="alert"><%= alert %></p><% end %>
+    <%= yield %>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_JS_API_KEY'] %>&libraries=places"></script>
+    <% if ENV["GOOGLE_MAPS_JS_API_KEY"].blank? %>
+      <script>
+        console.log("To enable the Google auto-complete, you'll need to set a google maps API key in .env")
+      </script>
+    <% end %>
+  </body>
+</html>

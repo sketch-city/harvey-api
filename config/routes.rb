@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     post :archive, on: :member
   end
   resources :shelters do
+    get :map, on: :collection
     get :drafts, on: :collection
     post :archive, on: :member
   end
